@@ -1,3 +1,6 @@
+<?php 
+//print_r($getMenuItems);
+?>
 <header class="header-2">
     <div class="header-area menu2">
         <div class="container">
@@ -110,14 +113,23 @@
                         <div class="main-menu visible-md visible-lg ">
                             <nav>
                                 <ul class="main">
-                                    <li class="active "><a class="main-a" href="index.html">Home</a>
-
-                                    </li>
-                                    <li><a class="main-a" href="#">What's New</a></li>
-                                    <li class="static"><a class="main-a" href="#"><span>Salwar Kameez</span></a>
+                                    <li class="active "><a class="main-a" href="index.html">Home</a></li>
+									<?php if(count($getMenuItems)) { $odd = true; foreach($getMenuItems as $k1=>$v1) { ?>
+                                    <!--<li><a class="main-a" href="#">What's New</a></li>-->
+                                    <li class="static"><a class="main-a" href="#"><span><?=($v1['cat_name'])?></span></a>
                                         <div class="mega-menu">
                                             <div class="mega-menu-def">
+											<?php if(isset($v1['childs']) && is_array($v1['childs']) && count($v1['childs'])) { foreach($v1['childs'] as $k2=>$v2) { $cat_name2 = str_replace(" ", "_",$v2['cat_name']);?>	
                                                 <div class="col-md-2 col-sm-2">
+                                                    <span class="Column-one">
+                                                        <a class="title-dropsown" href="{{url('products/browse/'.$cat_name2)}}"><?=($v2['cat_name'])?></a>
+														<?php if(isset($v2['childs']) && is_array($v2['childs']) && count($v2['childs'])) { foreach($v2['childs'] as $k3=>$v3) { $cat_name3 = str_replace(" ", "_",$v3['cat_name']);?>
+                                                        <a href="{{url('products/browse/'.$cat_name3)}}"><?=ucwords($v3['cat_name'])?></a>
+														<?php } } ?>   
+                                                    </span>
+                                                </div>
+												 <?php $odd = !$odd; } } ?>
+												<!--<div class="col-md-2 col-sm-2">
                                                     <span class="Column-one">
                                                         <a class="title-dropsown" href="#">Product Page</a>
                                                         <a href="#">Standard Product</a>
@@ -126,62 +138,37 @@
                                                         <a href="#">Group Product</a>   
                                                     </span>
                                                 </div>
-                                                <div class="col-md-2 col-sm-2">
+												
+												<div class="col-md-2 col-sm-2">
                                                     <span class="Column-one">
-                                                        <a class="title-dropsown" href="#">Product 1</a>
-                                                        <a href="#">Products 2</a>
-                                                        <a href="#">Product 3</a>
-                                                        <a href="#">Products 4</a>
-                                                        <a href="#">Products 5</a>    
+                                                        <a class="title-dropsown" href="#">Product Page</a>
+                                                        <a href="#">Standard Product</a>
+                                                        <a href="#">Variable Product</a>
+                                                        <a href="#">External Product</a>
+                                                        <a href="#">Group Product</a>   
                                                     </span>
-                                                </div>
-                                                <div class="col-md-2 col-sm-2">
-                                                    <span class="Column-one">
-                                                        <a class="title-dropsown" href="#">Designer Elements</a>
-                                                        <a href="#">Fashion On Sale <span class="on-sale">sale</span></a>
-                                                        <a href="#">Featured Design</a>
-                                                        <a href="#">Dress Deal<span class="on-sale2">Deals</span></a>  
-                                                        <a href="#">Sale Recent<span class="on-sale3">New</span></a>
-                                                    </span>
-                                                </div>
-                                                <div class="col-md-2 col-sm-2">
-                                                    <span class="Column-one right">
-                                                        <a class="title-dropsown" href="#">Sale 2018</a>
-                                                        <a href="#">Salwar Kameez</a>
-                                                        <a href="#">Kurtis</a>
-                                                        <a href="#">Lehngaas</a>
-                                                        <a href="#">Sarees</a>   
-                                                        <a href="#">Modren Design</a>   
-
-                                                    </span>
-                                                </div>
+                                                </div>-->
+                                                
+                                                
+                                                
                                                 <div class="col-md-4 col-sm-2">
                                                     <div class="img-widget">
                                                         <a href="#"><img src="{{asset('public/img/largmenu/fashion-bags.jpg')}}" alt=""></a>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="customblock">
-                                                                <img src="{{asset('public/img/customblock/customblock1.jpg')}}" alt="">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="customblock">
-                                                                <img src="{{asset('public/img/customblock/customblock2.jpg')}}" alt="">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </li>
-                                    <li><a class="main-a" href="#">Kutris</a></li>
+									<?php 
+										}
+									}
+									?>
+                                    <!--<li><a class="main-a" href="#">Kutris</a></li>
                                     <li><a class="main-a" href="#">Indowstern</a></li>
                                     <li><a class="main-a" href="#">Bridal</a></li>
                                     <li><a class="main-a" href="#">Aceeessories</a></li>
-                                    <li><a class="main-a" href="#">Deals</a></li>
+                                    <li><a class="main-a" href="#">Deals</a></li>-->
                                     <li><a class="main-a" href="#">Blogs</a></li>										
                                     <li><a class="main-a" href="#">Contact</a></li>
                                     <li><a class="main-a" href="#">About Us</a></li>

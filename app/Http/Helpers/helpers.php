@@ -48,7 +48,7 @@ function src_path()
 function img_src_path()
 {
 	if(is_localhost())
-		$path = "http://localhost/pcs/public/upload/";
+		$path = "http://farahbeauty.in/dajwari/uploads/";
 	else 
 		$path = "http://farahbeauty.in/dajwari/uploads/";
 	return $path;

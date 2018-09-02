@@ -29,10 +29,10 @@ class HomeController extends Controller
 		$post = $request->all();
 		$getMenuItems = Products::getMenuItems();
 		$getHomeBanners = Products::getHomeBanners();
-		$p_customer_fav = Products::getProductsList(array('p_customer_fav'=>1) , 10);
-		$p_trending = Products::getProductsList(array('p_trending'=>1) , 10);
+		$p_customer_fav = Products::getProductsList(array('p_customer_fav'=>1) , 8);
+		$p_trending = Products::getProductsList(array('p_trending'=>1) , 8);
 		//echo '<pre>';print_r($getMenuItems);die;
-        return view('index',compact('getCustomerFav'));
+        return view('index',compact('getMenuItems','getHomeBanners','p_customer_fav','p_trending'));
     }
 	public function search(Request $request){
 		$post = $request->all();
