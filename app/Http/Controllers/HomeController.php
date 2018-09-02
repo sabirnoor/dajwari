@@ -25,10 +25,13 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request){
+    public function index(Request $request){//echo img_src_path();
 		$post = $request->all();
-		$getCustomerFav = Products::getCustomerFav();
-		//echo '<pre>';print_r($getCustomerFav);die;
+		$getMenuItems = Products::getMenuItems();
+		$getHomeBanners = Products::getHomeBanners();
+		$p_customer_fav = Products::getProductsList(array('p_customer_fav'=>1) , 10);
+		$p_trending = Products::getProductsList(array('p_trending'=>1) , 10);
+		//echo '<pre>';print_r($getMenuItems);die;
         return view('index',compact('getCustomerFav'));
     }
 	public function search(Request $request){
