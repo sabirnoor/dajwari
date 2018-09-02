@@ -6,9 +6,17 @@
     <div class="slider-container theme-default">
         <!-- Slider Image -->
         <div id="mainSlider" class="nivoSlider slider-image">
-            <img src="{{asset('public/img/slider/slide-1.jpg')}}" alt="main slider"  title="#htmlcaption1"/>
-            <img src="{{asset('public/img/slider/slide-2.jpg')}}" alt="main slider"  title="#htmlcaption2"/>
-            <img src="{{asset('public/img/slider/slide-3.jpg')}}" alt="main slider"  title="#htmlcaption3"/>
+			<?php 
+			if($getHomeBanners){
+				foreach($getHomeBanners as $key=>$value){
+			?>
+            <img src="{{img_src_path()}}home_banners/{{$value->img_name}}" alt="{{$value->img_purpose}}"  title="#htmlcaption{{$key}}"/>
+			<?php
+				}
+			}
+			?>
+             <!--<img src="{{asset('public/img/slider/slide-2.jpg')}}" alt="main slider"  title="#htmlcaption2"/>
+            <img src="{{asset('public/img/slider/slide-3.jpg')}}" alt="main slider"  title="#htmlcaption3"/>-->
         </div>
         <!-- Slider Caption 1 -->
         <div id="htmlcaption1" class="nivo-html-caption slider-caption-1">
@@ -186,6 +194,11 @@
         </div>
         <div class="row">
             <div class="product-area">
+				<?php 
+				if($p_customer_fav){
+					foreach($p_customer_fav as $key=>$val){
+						$val = (array) $val['p_details'];
+				?>
                 <div class="col-md-3 col-sm-4 col-xs-12">
                     <div class="single-product">
                         <div class="product-image fix">
@@ -204,7 +217,7 @@
                                 </div>
                             </div>
                         </div>
-                        <h4 class="name"><a href="#">Designer Salwar Kameez</a></h4>
+                        <h4 class="name"><a href="#" title="<?=$val['p_name']?>"><?=$val['p_name']?></a></h4>
                         <span class="amount">
 
                             RS, 1200
@@ -214,234 +227,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-4 col-xs-12">
-                    <div class="single-product">
-                        <div class="product-image fix">
-                            <a href="product-list.html">
-                                <img  src="{{asset('public/img/product/3.jpg')}}" alt="">
-                                <img class="primary-2" src="{{asset('public/img/product/2.jpg')}}" alt="">
-                            </a>
-                            <div class="product-action">
-                                <a href="#" data-toggle="modal" data-target="#myModal"  title="Quick view"><i class="fa fa-eye"></i></a>
-                                <a href="#" data-toggle="tooltip"  title="Wishlist" ><i class="fa fa-heart"></i></a>
-                                <a href="#" data-toggle="tooltip" data-placement="top" title="Compare" ><i class="fa fa-retweet"></i></a>
-                            </div>
-                            <div class="new-area sell-area">
-                                <div class="new">
-                                    <span class="text-new"><span>sell</span></span>
-                                </div>
-                            </div>
-                            <div class="color">
-                                <ul class="color-list">
-                                    <li class="bk"><span>bk</span></li>
-                                    <li class="rd"><span>rd</span></li>
-                                    <li class="yl"><span>yl</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <h4 class="name"><a href="#">Designer Salwar Kameez</a></h4>
-                        <span class="amount">
-
-                            RS, 1200
-                        </span>
-                        <div class="add-to-cart">
-                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-4 col-xs-12">
-                    <div class="single-product">
-                        <div class="product-image fix">
-                            <a href="product-list.html">
-                                <img  src="{{asset('public/img/product/1.jpg')}}" alt="">
-                                <img class="primary-2" src="{{asset('public/img/product/2.jpg')}}" alt="">
-                            </a>
-                            <div class="product-action">
-                                <a href="#" data-toggle="modal" data-target="#myModal"  title="Quick view"><i class="fa fa-eye"></i></a>
-                                <a href="#" data-toggle="tooltip"  title="Wishlist" ><i class="fa fa-heart"></i></a>
-                                <a href="#" data-toggle="tooltip" data-placement="top" title="Compare" ><i class="fa fa-retweet"></i></a>
-                            </div>
-                            <div class="new-area sell-area">
-                                <div class="new">
-                                    <span class="text-new"><span>sell</span></span>
-                                </div>
-                            </div>
-                            <div class="color">
-                                <ul class="color-list">
-                                    <li class="bk"><span>bk</span></li>
-                                    <li class="rd"><span>rd</span></li>
-                                    <li class="yl"><span>yl</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <h4 class="name"><a href="#">Designer Salwar Kameez</a></h4>
-                        <span class="amount">
-
-                            RS, 1200
-                        </span>
-                        <div class="add-to-cart">
-                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-4 col-xs-12">
-                    <div class="single-product">
-                        <div class="product-image fix">
-                            <a href="product-list.html">
-                                <img  src="{{asset('public/img/product/1.jpg')}}" alt="">
-                                <img class="primary-2" src="{{asset('public/img/product/2.jpg')}}" alt="">
-                            </a>
-                            <div class="product-action">
-                                <a href="#" data-toggle="modal" data-target="#myModal"  title="Quick view"><i class="fa fa-eye"></i></a>
-                                <a href="#" data-toggle="tooltip"  title="Wishlist" ><i class="fa fa-heart"></i></a>
-                                <a href="#" data-toggle="tooltip" data-placement="top" title="Compare" ><i class="fa fa-retweet"></i></a>
-                            </div>
-                            <div class="new-area">
-                                <div class="new">
-                                    <span class="text-new"><span>new</span></span>
-                                </div>
-                            </div>
-                        </div>
-                        <h4 class="name"><a href="product-list.html">Designer Salwar Kameez</a></h4>
-                        <span class="amount">
-
-                            RS, 1200
-                        </span>
-                        <div class="add-to-cart">
-                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-4 col-xs-12">
-                    <div class="single-product">
-                        <div class="product-image fix">
-                            <a href="product-list.html">
-                                <img  src="{{asset('public/img/product/1.jpg')}}" alt="">
-                                <img class="primary-2" src="{{asset('public/img/product/2.jpg')}}" alt="">
-                            </a>
-                            <div class="product-action">
-                                <a href="#" data-toggle="modal" data-target="#myModal"  title="Quick view"><i class="fa fa-eye"></i></a>
-                                <a href="#" data-toggle="tooltip"  title="Wishlist" ><i class="fa fa-heart"></i></a>
-                                <a href="#" data-toggle="tooltip" data-placement="top" title="Compare" ><i class="fa fa-retweet"></i></a>
-                            </div>
-                            <div class="new-area sell-area">
-                                <div class="new">
-                                    <span class="text-new"><span>sell</span></span>
-                                </div>
-                            </div>
-                            <div class="color">
-                                <ul class="color-list">
-                                    <li class="bk"><span>bk</span></li>
-                                    <li class="rd"><span>rd</span></li>
-                                    <li class="yl"><span>yl</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <h4 class="name"><a href="product-list.html">Designer Dress</a></h4>
-                        <span class="amount">
-
-                            RS, 11000
-                        </span>
-                        <div class="add-to-cart">
-                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-4 col-xs-12">
-                    <div class="single-product">
-                        <div class="product-image fix">
-                            <a href="product-list.html">
-                                <img  src="{{asset('public/img/product/6.jpg')}}" alt="">
-                                <img class="primary-2" src="{{asset('public/img/product/7.jpg')}}" alt="">
-                            </a>
-                            <div class="product-action">
-                                <a href="#" data-toggle="modal" data-target="#myModal"  title="Quick view"><i class="fa fa-eye"></i></a>
-                                <a href="#" data-toggle="tooltip"  title="Wishlist" ><i class="fa fa-heart"></i></a>
-                                <a href="#" data-toggle="tooltip" data-placement="top" title="Compare" ><i class="fa fa-retweet"></i></a>
-                            </div>
-                            <div class="new-area sell-area">
-                                <div class="new">
-                                    <span class="text-new"><span>sell</span></span>
-                                </div>
-                            </div>
-                            <div class="color">
-                                <ul class="color-list">
-                                    <li class="bk"><span>bk</span></li>
-                                    <li class="rd"><span>rd</span></li>
-                                    <li class="yl"><span>yl</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <h4 class="name"><a href="product-list.html">Designer Dress</a></h4>
-                        <span class="amount">
-                            RS, 11000
-                        </span>
-                        <div class="add-to-cart">
-                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 hidden-sm col-xs-12">
-                    <div class="single-product">
-                        <div class="product-image fix">
-                            <a href="product-list.html">
-                                <img  src="{{asset('public/img/product/6.jpg')}}" alt="">
-                                <img class="primary-2" src="{{asset('public/img/product/2.jpg')}}" alt="">
-                            </a>
-                            <div class="product-action">
-                                <a href="#" data-toggle="modal" data-target="#myModal"  title="Quick view"><i class="fa fa-eye"></i></a>
-                                <a href="#" data-toggle="tooltip"  title="Wishlist" ><i class="fa fa-heart"></i></a>
-                                <a href="#" data-toggle="tooltip" data-placement="top" title="Compare" ><i class="fa fa-retweet"></i></a>
-                            </div>
-                            <div class="new-area">
-                                <div class="new">
-                                    <span class="text-new"><span>new</span></span>
-                                </div>
-                            </div>
-                        </div>
-                        <h4 class="name"><a href="product-list.html">Designer Dress</a></h4>
-                        <span class="amount">
-                            RS, 11000
-                        </span>
-                        <div class="add-to-cart">
-                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 hidden-sm col-xs-12">
-                    <div class="single-product">
-                        <div class="product-image fix">
-                            <a href="product-list.html">
-                                <img  src="{{asset('public/img/product/9.jpg')}}" alt="">
-                                <img class="primary-2" src="{{asset('public/img/product/8.jpg')}}" alt="">
-                            </a>
-                            <div class="product-action">
-                                <a href="#" data-toggle="modal" data-target="#myModal"  title="Quick view"><i class="fa fa-eye"></i></a>
-                                <a href="#" data-toggle="tooltip"  title="Wishlist" ><i class="fa fa-heart"></i></a>
-                                <a href="#" data-toggle="tooltip" data-placement="top" title="Compare" ><i class="fa fa-retweet"></i></a>
-                            </div>
-                            <div class="new-area sell-area">
-                                <div class="new">
-                                    <span class="text-new"><span>sell</span></span>
-                                </div>
-                            </div>
-                            <div class="color">
-                                <ul class="color-list">
-                                    <li class="bk"><span>bk</span></li>
-                                    <li class="rd"><span>rd</span></li>
-                                    <li class="yl"><span>yl</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <h4 class="name"><a href="product-list.html">Designer Dress</a></h4>
-                        <span class="amount">
-                            RS, 11000
-                        </span>
-                        <div class="add-to-cart">
-                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                        </div>
-                    </div>
-                </div>
+				<?php 
+					}
+				}
+				?>
             </div>    
         </div>
         <div class="row">
