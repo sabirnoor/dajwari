@@ -82,6 +82,7 @@ $action = Request::segment(1);
 		<script type="text/javascript" src="{{asset('public/lazy-master/jquery.lazy.plugins.min.js') }}"></script>
         <!-- main js -->
         <script src="{{asset('public/js/main.js') }}"></script>
+		
 
     </body>
 
