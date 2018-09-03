@@ -337,7 +337,7 @@ header{
     position: relative;
     font-family: "Open Sans";
     font-size: 13px;
-    display: inline-block;
+    display: block;
 
     text-transform: capitalize;
 }

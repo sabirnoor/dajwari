@@ -197,14 +197,22 @@
 				<?php 
 				if($p_customer_fav){
 					foreach($p_customer_fav as $key=>$val){
+						$p_image = (array) $val['p_image'];
+						$p_image1 =  (isset($p_image[1]) && !empty($p_image[1])?$p_image[1]:'');
 						$val = (array) $val['p_details'];
+						$img = img_src_path()."products/small/".isset($p_image1)?$p_image1:'';
+						if(file_exists($img)){
+							$ddddd = 'yes';
+						}else{
+							$ddddd = 'no';
+						}
 				?>
                 <div class="col-md-3 col-sm-4 col-xs-12">
                     <div class="single-product">
                         <div class="product-image fix">
                             <a href="product-list.html">
-                                <img  src="{{asset('public/img/product/1.jpg')}}" alt="">
-                                <img class="primary-2" src="{{asset('public/img/product/2.jpg')}}" alt="">
+                                <img  src="{{img_src_path()}}products/small/{{$p_image[0]}}" alt="">
+                                <img class="primary-2" src="{{img_src_path()}}products/small/{{$p_image1}}" alt="">
                             </a>
                             <div class="product-action">
                                 <a href="#" data-toggle="modal" data-target="#myModal"  title="Quick view"><i class="fa fa-eye"></i></a>
@@ -213,15 +221,20 @@
                             </div>
                             <div class="new-area">
                                 <div class="new">
-                                    <span class="text-new"><span>new</span></span>
+                                    <span class="text-new"><span>new <?=$val['id']?></span></span>
                                 </div>
                             </div>
+							
+							<div class="color">
+								<ul class="color-list">
+									<li class="bk"><span>bk</span></li>
+									<li class="rd"><span>rd</span></li>
+									<li class="yl"><span>yl</span></li>
+								</ul>
+							</div>
                         </div>
-                        <h4 class="name"><a href="#" title="<?=$val['p_name']?>"><?=$val['p_name']?></a></h4>
-                        <span class="amount">
-
-                            RS, 1200
-                        </span>
+                        <h4 class="name"><a href="#" title="<?=$val['p_name']?>"><?=text_limit($val['p_name'],35)?></a></h4>
+                        <span class="amount">RS, 1200</span>
                         <div class="add-to-cart">
                             <a href="#"><i class="fa fa-shopping-cart"></i></a>
                         </div>
@@ -421,7 +434,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <h4 class="name"><a href="#">Designer Dress</a></h4>
+                            <h4 class="name"><a href="#">Designer Dress jjjj</a></h4>
                             <span class="amount">
                                 RS, 11000
                             </span>

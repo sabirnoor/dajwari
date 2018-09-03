@@ -31,9 +31,10 @@ function is_localhost() {
 function upload_path()
 {
 	if(is_localhost())
-		$path = public_path().'/upload/';
+		$path = '/home/developerkaif/public_html/farahbeauty.in/dajwari/uploads/';
+		//$path = public_path().'/upload/';
 	else 
-		$path = public_path().'/upload/';
+		$path = '/home/developerkaif/public_html/farahbeauty.in/dajwari/uploads/';
 	return $path;
 }
 
@@ -80,4 +81,17 @@ function array_empty($mixed) {
         return false;
     }
     return true;
+}
+
+function text_limit($x, $length){
+	
+  if(strlen($x)<=$length)
+  {
+    echo $x;
+  }
+  else
+  {
+    $y=substr($x,0,$length) . '...';
+    echo $y;
+  }
 }

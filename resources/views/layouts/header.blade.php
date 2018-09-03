@@ -114,13 +114,12 @@
                             <nav>
                                 <ul class="main">
                                     <li class="active "><a class="main-a" href="index.html">Home</a></li>
-									<?php if(count($getMenuItems)) { $odd = true; foreach($getMenuItems as $k1=>$v1) { ?>
-                                    <!--<li><a class="main-a" href="#">What's New</a></li>-->
+									<?php if(count($getMenuItems)) { foreach($getMenuItems as $k1=>$v1) { ?>
                                     <li class="static"><a class="main-a" href="#"><span><?=($v1['cat_name'])?></span></a>
                                         <div class="mega-menu">
                                             <div class="mega-menu-def">
 											<?php if(isset($v1['childs']) && is_array($v1['childs']) && count($v1['childs'])) { foreach($v1['childs'] as $k2=>$v2) { $cat_name2 = str_replace(" ", "_",$v2['cat_name']);?>	
-                                                <div class="col-md-2 col-sm-2">
+                                                <div class="col-md-3 col-sm-3">
                                                     <span class="Column-one">
                                                         <a class="title-dropsown" href="{{url('products/browse/'.$cat_name2)}}"><?=($v2['cat_name'])?></a>
 														<?php if(isset($v2['childs']) && is_array($v2['childs']) && count($v2['childs'])) { foreach($v2['childs'] as $k3=>$v3) { $cat_name3 = str_replace(" ", "_",$v3['cat_name']);?>
@@ -128,7 +127,7 @@
 														<?php } } ?>   
                                                     </span>
                                                 </div>
-												 <?php $odd = !$odd; } } ?>
+												 <?php } } ?>
 												<!--<div class="col-md-2 col-sm-2">
                                                     <span class="Column-one">
                                                         <a class="title-dropsown" href="#">Product Page</a>
@@ -151,9 +150,13 @@
                                                 
                                                 
                                                 
-                                                <div class="col-md-4 col-sm-2">
+                                                <div class="col-md-3 col-sm-3">
                                                     <div class="img-widget">
-                                                        <a href="#"><img src="{{asset('public/img/largmenu/fashion-bags.jpg')}}" alt=""></a>
+													<?php if(isset($v2['cat_image']) && $v2['cat_image'] <> '') { ?>
+                                                        <a href="#"><img src="{{img_src_path()}}{{$v2['cat_image']}}" alt=""></a>
+														<?php } else { ?>
+                                                        <a href="#"><img src="{{asset('public/img/largmenu/Party_Wear.png')}}" alt=""></a>
+														<?php } ?>
                                                     </div>
                                                 </div>
                                                 

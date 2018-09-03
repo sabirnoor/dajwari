@@ -31,14 +31,14 @@ class HomeController extends Controller
 		$getHomeBanners = Products::getHomeBanners();
 		$p_customer_fav = Products::getProductsList(array('p_customer_fav'=>1) , 8);
 		$p_trending = Products::getProductsList(array('p_trending'=>1) , 8);
-		//echo '<pre>';print_r($getMenuItems);die;
+		//echo '<pre>';print_r($p_trending);die;
         return view('index',compact('getMenuItems','getHomeBanners','p_customer_fav','p_trending'));
     }
 	public function search(Request $request){
 		$post = $request->all();
-		$details = DajwariCategories::getCategories();
+		$getMenuItems = Products::getMenuItems();
 		//echo '<pre>';print_r($details);die;
-        return view('search');
+        return view('search',compact('getMenuItems'));
     }
     public function dashboard()
     {
