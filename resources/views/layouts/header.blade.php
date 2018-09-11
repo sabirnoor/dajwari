@@ -121,9 +121,9 @@
 											<?php if(isset($v1['childs']) && is_array($v1['childs']) && count($v1['childs'])) { foreach($v1['childs'] as $k2=>$v2) { $cat_name2 = str_replace(" ", "_",$v2['cat_name']);?>	
                                                 <div class="col-md-3 col-sm-3">
                                                     <span class="Column-one">
-                                                        <a class="title-dropsown" href="{{url('products/browse/'.$cat_name2)}}"><?=($v2['cat_name'])?></a>
+                                                        <a class="title-dropsown" href="{{url('products/'.$cat_name2)}}"><?=($v2['cat_name'])?></a>
 														<?php if(isset($v2['childs']) && is_array($v2['childs']) && count($v2['childs'])) { foreach($v2['childs'] as $k3=>$v3) { $cat_name3 = str_replace(" ", "_",$v3['cat_name']);?>
-                                                        <a href="{{url('products/browse/'.$cat_name3)}}"><?=ucwords($v3['cat_name'])?></a>
+                                                        <a href="{{url('products/'.$cat_name3)}}"><?=ucwords($v3['cat_name'])?></a>
 														<?php } } ?>   
                                                     </span>
                                                 </div>

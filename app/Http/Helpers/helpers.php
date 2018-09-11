@@ -1,5 +1,6 @@
 <?php
 Use App\Image\Resize\SimpleImage;
+use App\Products;
 
 function pr($string){
 	 echo "<pre>";
@@ -11,7 +12,15 @@ function clean($string) {
    $string = str_replace('', '-', $string); // Replaces all spaces with hyphens.
    return preg_replace('/[^A-Za-z0-9\-]/', '-', strtolower($string)); // Removes special chars.
 }
-
+function getProductColorDetails($id){
+	return Products::getProductColorDetails($id);
+}
+function getProductSizeDetails($id){
+	return Products::getProductSizeDetails($id);
+}
+function getProductImageDetails($id){
+	return Products::getProductImageDetails($id);
+}
 
 
 function imageResize($old_image,$new_image_name, $target_dir, $new_img_width, $new_img_height){

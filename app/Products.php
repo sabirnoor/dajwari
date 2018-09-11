@@ -2,6 +2,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use App\Http\Requests;
 use DB;
 class Products extends Model {
 	
@@ -138,6 +140,63 @@ class Products extends Model {
 						}
 					}
 				}
+			}
+		return $data;
+	}
+	
+	public static function getTrendingMenu($limit = null){
+		$select = DB::table('dajwari_categories as c1')
+			->select('c1.id','c1.cat_name',DB::raw("count(c1.id) as countTotal"))
+			->join('dajwari_products as c2', 'c1.id', '=', 'c2.cat_id')
+			->when($limit, function ($query, $limit) {
+				 return $query->limit($limit);
+			})
+			->groupBy('c1.id','c1.cat_name')->get();	
+		return $select;
+		///->inRandomOrder()
+	}
+	
+	
+	public static function getBrowseProductsList($cond = array() , $limit = 20, $cat = ''){
+		$data = array();
+		$select = DB::table('dajwari_products as c1')
+			->select('c1.*', 'c2.cat_name')
+			->leftjoin('dajwari_categories as c2', 'c1.cat_id', '=', 'c2.id')
+			->when($cond, function ($query, $cond) {
+				if(count($cond)) {
+					foreach($cond as $key=>$val) {
+						return $query->where('c1.'.$key.'', ''.$val.'');
+					}
+				}
+			})
+			->when($cat, function ($query, $cat) {
+				 return $query->where('c2.cat_name', 'like', '%' . $cat . '%');
+			})
+			->orderBy('c1.id', 'DESC')->paginate($limit);
+			/*if ($select) {
+				$counter = 0;
+				foreach ($select as $row) {
+					$row = (array) $row;
+					$data[$counter]['p_details'] = $row;
+					$data[$counter]['p_color'] = self::getProductColorDetails($row['id']);
+					$data[$counter]['p_size'] = self::getProductSizeDetails($row['id']);
+					$data[$counter]['p_image'] = self::getProductImageDetails($row['id']);
+					$counter++;
+				}
+			}
+			$data['total_records'] = $select->count();*/
+		return $select;
+		
+	}
+	
+	public static function get_dajwari_category_id($cat = ''){
+		$data = 1;
+		if($cat == '') {
+			return $data;
+		}
+		$query = DB::table('dajwari_categories as c1')->where('c1.cat_name', $cat)->get();	
+			if ($query) {
+				$data = isset($query[0])?$query[0]->id:1;
 			}
 		return $data;
 	}

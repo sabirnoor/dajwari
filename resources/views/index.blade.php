@@ -330,19 +330,39 @@
             <div class="col-md-12">
                 <div class="filter-mnu">
                     <div class="filter" data-filter="all">all</div>
-                    <div class="filter" data-filter=".Nightwear">Salwar Kameez</div>
-                    <div class="filter" data-filter=".Dress">Dress</div>
-                    <div class="filter" data-filter=".Jewellery">Designer Suits</div>
+					<?php 
+					if($getTrendingMenu){
+						foreach($getTrendingMenu as $v){
+							$v = (array) $v;
+							$cat_name = str_replace(" ", "_",$v['cat_name']);
+							$cat_name2 = str_replace("'", "_",$cat_name);
+							
+					?>
+                    <div class="filter" data-filter=".<?=$cat_name2?>"><?=trim($v['cat_name'])?> </div>
+					<?php 
+						}
+					}
+					?>
+                    
                 </div>
             </div>
             <div id="Container">
-                <div class="mix  Nightwear Dress">
+			<?php 
+			if($p_trending){
+				foreach($p_trending as $val){
+					$p_image = (array) $val['p_image'];
+					$p_image1 =  (isset($p_image[1]) && !empty($p_image[1])?$p_image[1]:'');
+					$val = (array) $val['p_details'];
+					$cat_name = str_replace(" ", "_",$val['cat_name']);
+					$cat_name2 = str_replace("'", "_",$cat_name);
+			?>
+                <div class="mix  <?=$cat_name2?>">
                     <div class="col-md-3">
                         <div class="single-product">
                             <div class="product-image fix">
                                 <a href="product-list.html">
-                                    <img  src="{{asset('public/img/product/1.jpg')}}" alt="">
-                                    <img class="primary-2" src="{{asset('public/img/product/2.jpg')}}" alt="">
+                                    <img  src="{{img_src_path()}}products/small/{{$p_image[0]}}" alt="">
+									<img class="primary-2" src="{{img_src_path()}}products/small/{{$p_image1}}" alt="">
                                 </a>
                                 <div class="product-action">
                                     <a href="#" data-toggle="tooltip"   title="Quick view"><i class="fa fa-eye"></i></a>
@@ -362,7 +382,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <h4 class="name"><a href="#">Designer Dress</a></h4>
+                            <h4 class="name"><a href="#" title="<?=$val['p_name']?>"><?=text_limit($val['p_name'],35)?></a></h4>
                             <span class="amount">
                                 RS, 11000
                             </span>
@@ -372,114 +392,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="mix Dress Jewellery">
-                    <div class="col-md-3">
-                        <div class="single-product">
-                            <div class="product-image fix">
-                                <a href="product-list.html">
-                                    <img  src="{{asset('public/img/product/3.jpg')}}" alt="">
-                                    <img class="primary-2" src="{{asset('public/img/product/2.jpg')}}" alt="">
-                                </a>
-                                <div class="product-action">
-                                    <a href="#" data-toggle="tooltip"   title="Quick view"><i class="fa fa-eye"></i></a>
-                                    <a href="#" data-toggle="tooltip"  title="Wishlist" ><i class="fa fa-heart"></i></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Compare" ><i class="fa fa-retweet"></i></a>
-                                </div>
-                                <div class="new-area sell-area">
-                                    <div class="new">
-                                        <span class="text-new"><span>sell</span></span>
-                                    </div>
-                                </div>
-                                <div class="color">
-                                    <ul class="color-list">
-                                        <li class="bk"><span>bk</span></li>
-                                        <li class="rd"><span>rd</span></li>
-                                        <li class="yl"><span>yl</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <h4 class="name"><a href="#">Designer Dress</a></h4>
-                            <span class="amount">
-                                RS, 11000
-                            </span>
-                            <div class="add-to-cart">
-                                <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mix Nightwear Jewellery">
-                    <div class="col-md-3">
-                        <div class="single-product">
-                            <div class="product-image fix">
-                                <a href="product-list.html">
-                                    <img  src="{{asset('public/img/product/4.jpg')}}" alt="">
-                                    <img class="primary-2" src="{{asset('public/img/product/1.jpg')}}" alt="">
-                                </a>
-                                <div class="product-action">
-                                    <a href="#" data-toggle="tooltip"   title="Quick view"><i class="fa fa-eye"></i></a>
-                                    <a href="#" data-toggle="tooltip"  title="Wishlist" ><i class="fa fa-heart"></i></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Compare" ><i class="fa fa-retweet"></i></a>
-                                </div>
-                                <div class="new-area sell-area">
-                                    <div class="new">
-                                        <span class="text-new"><span>sell</span></span>
-                                    </div>
-                                </div>
-                                <div class="color">
-                                    <ul class="color-list">
-                                        <li class="bk"><span>bk</span></li>
-                                        <li class="rd"><span>rd</span></li>
-                                        <li class="yl"><span>yl</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <h4 class="name"><a href="#">Designer Dress jjjj</a></h4>
-                            <span class="amount">
-                                RS, 11000
-                            </span>
-                            <div class="add-to-cart">
-                                <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mix Nightwear Jewellery Dress">
-                    <div class="col-md-3 hidden-sm">
-                        <div class="single-product">
-                            <div class="product-image fix">
-                                <a href="product-list.html">
-                                    <img  src="{{asset('public/img/product/5.jpg')}}" alt="">
-                                    <img class="primary-2" src="{{asset('public/img/product/2.jpg')}}" alt="">
-                                </a>
-                                <div class="product-action">
-                                    <a href="#" data-toggle="tooltip"   title="Quick view"><i class="fa fa-eye"></i></a>
-                                    <a href="#" data-toggle="tooltip"  title="Wishlist" ><i class="fa fa-heart"></i></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Compare" ><i class="fa fa-retweet"></i></a>
-                                </div>
-                                <div class="new-area sell-area">
-                                    <div class="new">
-                                        <span class="text-new"><span>sell</span></span>
-                                    </div>
-                                </div>
-                                <div class="color">
-                                    <ul class="color-list">
-                                        <li class="bk"><span>bk</span></li>
-                                        <li class="rd"><span>rd</span></li>
-                                        <li class="yl"><span>yl</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <h4 class="name"><a href="#">Designer Dress</a></h4>
-                            <span class="amount">
-                                RS, 11000
-                            </span>
-                            <div class="add-to-cart">
-                                <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+				<?php 
+					}
+				}
+				?>
+                
             </div>
         </div>
     </div>
