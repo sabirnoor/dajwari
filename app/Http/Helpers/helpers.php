@@ -103,4 +103,43 @@ function text_limit($x, $length){
     $y=substr($x,0,$length) . '...';
     echo $y;
   }
+
+}
+
+function arrayUnique($array, $preserveKeys = false)  
+{  
+    // Unique Array for return  
+    $arrayRewrite = array();  
+    // Array with the md5 hashes  
+    $arrayHashes = array();  
+    foreach($array as $key => $item) {  
+        // Serialize the current element and create a md5 hash  
+        $hash = md5(serialize($item));  
+        // If the md5 didn't come up yet, add the element to  
+        // to arrayRewrite, otherwise drop it  
+        if (!isset($arrayHashes[$hash])) {  
+            // Save the current element hash  
+            $arrayHashes[$hash] = $hash;  
+            // Add element to the unique Array  
+            if ($preserveKeys) {  
+                $arrayRewrite[$key] = $item;  
+            } else {  
+                $arrayRewrite[] = $item;  
+            }  
+        }  
+    }  
+    return $arrayRewrite;  
+}
+
+function sortArrayval($array){
+	for($j = 0; $j < count($array); $j ++) {
+		for($i = 0; $i < count($array)-1; $i ++){
+			if($array[$i] > $array[$i+1]) {
+				$temp = $array[$i+1];
+				$array[$i+1]=$array[$i];
+				$array[$i]=$temp;
+			}       
+		}
+	}
+	return $array;
 }

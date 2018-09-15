@@ -302,7 +302,7 @@
         range: true,
         min: 40,
         max: 600,
-        values: [ 60, 570 ],
+        values: [ 40, 10000 ],
         slide: function( event, ui ) {
         amount.val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
         }

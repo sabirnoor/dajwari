@@ -200,6 +200,93 @@ class Products extends Model {
 			}
 		return $data;
 	}
+	
+	public static function SearchProductsList($cond = null , $limit = null, $keywords = null, $cat = null){
+		$data = array();
+		$select = DB::table('dajwari_products as c1')
+			->select('c1.*', 'c2.cat_name')
+			->leftjoin('dajwari_categories as c2', 'c1.cat_id', '=', 'c2.id')
+			->when($cond, function ($query, $cond) {
+				if(count($cond)) {
+					foreach($cond as $key=>$val) {
+						return $query->where('c1.'.$key.'', ''.$val.'');
+					}
+				}
+			})
+			->when($keywords, function ($query, $keywords) {
+				 return $query->where('c2.cat_name', 'like', '%'.$keywords.'%');
+			})
+			->when($limit, function ($query, $limit) {
+				 return $query->limit($limit);
+			})
+			->orderBy('c1.p_price', 'ASC')->get();	
+			if ($select) {
+				$counter = 0;
+				foreach ($select as $row) {
+					$data[$counter]['p_details'] = $row;
+					$data[$counter]['p_color'] = self::getProductColorDetails($row->id);
+					$data[$counter]['p_size'] = self::getProductSizeDetails($row->id);
+					$data[$counter]['p_image'] = self::getProductImageDetails($row->id);
+					
+					$Colordata[] = self::getProductColorDetails($row->id);
+					$Sizedata[] = self::getProductSizeDetails($row->id);
+					$dispatch[] = $row->p_dispatch;
+					$counter++;
+				}
+			}
+			
+			$data['filter_color'] = self::getfiltercolor($keywords,$cat);
+			$data['filter_size'] = self::getfiltersize($keywords,$cat);
+			$data['filter_dispatch'] = self::getfilterdispatch($keywords,$cat);
+			$data['filter_fabric'] = self::getfilterfabric($keywords,$cat);
+			//$data['filter_dispatch'] = sortArrayval($dispatcharr);
+			//echo '<pre>';print_r($data);die;
+		return $data;
+	}
+	
+	public static function getfiltercolor($keywords = null, $cat = null){
+		$select = DB::table('dajwari_products_colors as c1')
+			->select('c1.color_name',DB::raw("count(c1.color_name) as countTotal"))
+			->join('dajwari_products as c2', 'c1.p_id', '=', 'c2.id')
+			->leftjoin('dajwari_categories as c3', 'c2.cat_id', '=', 'c3.id')
+			->when($keywords, function ($query, $keywords) {
+				 return $query->where('c3.cat_name', 'like', '%'.$keywords.'%');
+			})
+			->groupBy('c1.color_name')->get();	
+		return $select;
+	}
+	public static function getfiltersize($keywords = null, $cat = null){
+		$select = DB::table('dajwari_products_sizes as c1')
+			->select('c1.p_size',DB::raw("count(c1.p_size) as countTotal"))
+			->join('dajwari_products as c2', 'c1.p_id', '=', 'c2.id')
+			->leftjoin('dajwari_categories as c3', 'c2.cat_id', '=', 'c3.id')
+			->when($keywords, function ($query, $keywords) {
+				 return $query->where('c3.cat_name', 'like', '%'.$keywords.'%');
+			})
+			->groupBy('c1.p_size')->get();	
+		return $select;
+	}
+	
+	public static function getfilterdispatch($keywords = null, $cat = null){
+		$select = DB::table('dajwari_products as c1')
+			->select('c1.p_dispatch',DB::raw("count(c1.p_dispatch) as countTotal"))
+			->leftjoin('dajwari_categories as c3', 'c1.cat_id', '=', 'c3.id')
+			->when($keywords, function ($query, $keywords) {
+				 return $query->where('c3.cat_name', 'like', '%'.$keywords.'%');
+			})
+			->groupBy('c1.p_dispatch')->get();	
+		return $select;
+	}
+	public static function getfilterfabric($keywords = null, $cat = null){
+		$select = DB::table('dajwari_products as c1')
+			->select('c1.p_fabric',DB::raw("count(c1.p_fabric) as countTotal"))
+			->leftjoin('dajwari_categories as c3', 'c1.cat_id', '=', 'c3.id')
+			->when($keywords, function ($query, $keywords) {
+				 return $query->where('c3.cat_name', 'like', '%'.$keywords.'%');
+			})
+			->groupBy('c1.p_fabric')->get();	
+		return $select;
+	}
   
 }
 ?>

@@ -39,8 +39,12 @@ class HomeController extends Controller
 	
 	public function search(Request $request){
 		$post = $request->all();
+		$keywords = isset($post['q'])?$post['q']:'';
+		$cat = $post['cat'];
 		$getMenuItems = Products::getMenuItems();
-		//echo '<pre>';print_r($details);die;
+		$SearchProductsList = Products::SearchProductsList(array() , 100, $keywords, $cat);
+		$getfiltercolor = Products::getfiltercolor();
+		//echo '<pre>';print_r($SearchProductsList);
         return view('search',compact('getMenuItems'));
     }
 	
