@@ -202,7 +202,7 @@ class Products extends Model {
 	}
 	
 	public static function SearchProductsList($cond = null , $limit = null, $keywords = null, $cat = null){
-		$data = array();
+		$data = array();$Filterdata = array();
 		$select = DB::table('dajwari_products as c1')
 			->select('c1.*', 'c2.cat_name')
 			->leftjoin('dajwari_categories as c2', 'c1.cat_id', '=', 'c2.id')
@@ -228,20 +228,21 @@ class Products extends Model {
 					$data[$counter]['p_size'] = self::getProductSizeDetails($row->id);
 					$data[$counter]['p_image'] = self::getProductImageDetails($row->id);
 					
-					$Colordata[] = self::getProductColorDetails($row->id);
-					$Sizedata[] = self::getProductSizeDetails($row->id);
-					$dispatch[] = $row->p_dispatch;
+					//$Colordata[] = self::getProductColorDetails($row->id);
+					//$Sizedata[] = self::getProductSizeDetails($row->id);
+					//$dispatch[] = $row->p_dispatch;
 					$counter++;
 				}
 			}
 			
-			$data['filter_color'] = self::getfiltercolor($keywords,$cat);
-			$data['filter_size'] = self::getfiltersize($keywords,$cat);
-			$data['filter_dispatch'] = self::getfilterdispatch($keywords,$cat);
-			$data['filter_fabric'] = self::getfilterfabric($keywords,$cat);
+			$Filterdata['filter_color'] = self::getfiltercolor($keywords,$cat);
+			$Filterdata['filter_size'] = self::getfiltersize($keywords,$cat);
+			$Filterdata['filter_dispatch'] = self::getfilterdispatch($keywords,$cat);
+			$Filterdata['filter_fabric'] = self::getfilterfabric($keywords,$cat);
+			
 			//$data['filter_dispatch'] = sortArrayval($dispatcharr);
 			//echo '<pre>';print_r($data);die;
-		return $data;
+		return array('data'=>$data,'Filterdata'=>$Filterdata);
 	}
 	
 	public static function getfiltercolor($keywords = null, $cat = null){
@@ -287,6 +288,7 @@ class Products extends Model {
 			->groupBy('c1.p_fabric')->get();	
 		return $select;
 	}
+	
   
 }
 ?>

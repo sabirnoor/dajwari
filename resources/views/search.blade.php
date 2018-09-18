@@ -12,7 +12,7 @@
 		<div class="row">
 			<div class="col-md-3 col-xs-12" >
 				<div class="star_rating">
-					<form>
+					<form method="" action="">
 						<div class="widget">
 							<div class="widget shop-filter">
 								<h3>Price</h3>
@@ -27,7 +27,7 @@
 								</div>							
 							</div>
 						</div>
-						<div class="widget">
+						<!--<div class="widget">
 							<h3>DISCOUNT</h3>
 							<ul>
 
@@ -45,23 +45,33 @@
 									</div></li>
 
 							</ul>    
-						</div>
+						</div>-->
 						<div class="widget">
-							<h3>By Delivery Days</h3>
+							<h3>By product Size</h3>
 							<ul>
+							<?php 
+			if($SearchProductsList['Filterdata']['filter_size']){ 
+			$i=0;
+			//echo "<pre>";print_r($SearchProductsList); die(); 
+				foreach($SearchProductsList['Filterdata']['filter_size'] as $key=>$value){
+			?>
+			<li><div>										
+					<input id="size-checkbox-<?php echo $i; ?>" class="checkbox1-custom filterdata" name="filter_size[]" type="checkbox" value="<?php echo $value->p_size;?>" un-checked>
+					
+					<label for="size-checkbox-<?php echo $i; ?>" class="checkbox1-custom-label"><span>(<?php echo $value->countTotal;?>)</span><span><?php echo $value->p_size;?></span> </label>
+										
+									</div></li> 
+			<?php 
+			$i++;
+				}
+			}
+			?>
 
-								<li><div>
-										<input id="checkbox-4" class="checkbox1-custom" name="checkbox-4" type="checkbox" un-checked>
-										<label for="checkbox-4" class="checkbox1-custom-label"><span>Below 10 Days</span> <span>(647)</span></label>
-									</div></li>
-								<li><div>
-										<input id="checkbox-5" class="checkbox1-custom" name="checkbox-5" type="checkbox" un-checked>
-										<label for="checkbox-5" class="checkbox1-custom-label"><span>Below 10 Days</span> <span>(647)</span></label>
-									</div></li>
-								<li><div>
-										<input id="checkbox-6" class="checkbox1-custom" name="checkbox-6" type="checkbox" un-checked>
-										<label for="checkbox-6" class="checkbox1-custom-label"><span>Below 20 Days</span> <span>(647)</span></label>
-									</div></li>
+					<!--<li><div>
+							<input id="checkbox-4" class="checkbox1-custom" name="checkbox-4" type="checkbox" un-checked>
+							<label for="checkbox-4" class="checkbox1-custom-label"><span>Below 10 Days</span> <span>(647)</span></label>
+						</div></li>-->
+								
 
 							</ul>    
 						</div>
@@ -69,69 +79,78 @@
 						<div class="widget">
 							<h3>Color</h3>
 							<ul>
-								<li><div>
-										<input id="checkbox-7" class="checkbox1-custom" name="checkbox-7" type="checkbox" un-checked>
-										<label for="checkbox-7" class="checkbox1-custom-label"><span>Black</span> <span>(9)</span></label>
-									</div></li>
-								<li><div>
-										<input id="checkbox-8" class="checkbox1-custom" name="checkbox-8" type="checkbox" un-checked>
-										<label for="checkbox-8" class="checkbox1-custom-label"><span>Blue</span> <span>(8)</span></label>
-									</div></li>
-								<li><div>
-										<input id="checkbox-9" class="checkbox1-custom" name="checkbox-9" type="checkbox" un-checked>
-										<label for="checkbox-9" class="checkbox1-custom-label"><span>Brown</span> <span>(6)</span></label>
-									</div></li>
-
-								<li><div>
-										<input id="checkbox-10" class="checkbox1-custom" name="checkbox-10" type="checkbox" un-checked>
-										<label for="checkbox-10" class="checkbox1-custom-label"><span>Orange</span> <span>(8)</span></label>
-									</div></li>
-
-								<li><div>
-										<input id="checkbox-11" class="checkbox1-custom" name="checkbox-11" type="checkbox" un-checked>
-										<label for="checkbox-11" class="checkbox1-custom-label"><span>White</span> <span>(6)</span></label>
-									</div></li>
-
-								<li><div>
-										<input id="checkbox-12" class="checkbox1-custom" name="checkbox-12" type="checkbox" un-checked>
-										<label for="checkbox-12" class="checkbox1-custom-label"><span>Yelow</span> <span>(6)</span></label>
-									</div></li>
-
-								<li><div>
-										<input id="checkbox-13" class="checkbox1-custom" name="checkbox-13" type="checkbox" un-checked>
-										<label for="checkbox-13" class="checkbox1-custom-label"><span>Purple</span> <span>(6)</span></label>
-									</div></li>
+							
+							<?php 
+			if($SearchProductsList['Filterdata']['filter_color']){ 
+			$i=0;
+				foreach($SearchProductsList['Filterdata']['filter_color'] as $key=>$value){
+			?>
+			
+			<li><div>
+				<input id="color-checkbox-<?php echo $i; ?>" class="checkbox1-custom filterdata" name="filter_color[]" type="checkbox" value="<?php echo $value->color_name;?>"  un-checked>
+				<label for="color-checkbox-<?php echo $i; ?>" class="checkbox1-custom-label"><span>(<?php echo $value->countTotal;?>)</span><span><?php echo $value->color_name;?></span> </label>
+			</div></li>
+			
+			<?php 
+			$i++;
+				}
+			}
+			?>
+								
 							</ul> 
 						</div>
+						
 						<div class="widget">
-							<h3>Arts Style</h3>
+							<h3>By Delivery Days</h3>
 							<ul>
-								<li><a href="#">Crystals</a><span>(564)</span></li>
-								<li><a href="#">Jacquard </a><span>(564)</span></li>
-								<li><a href="#">Embroidered </a><span>(564)</span></li>
-								<li><a href="#">Resham  </a><span>(564)</span></li>
-								<li><a href="#">Beads </a><span> (564)</span></li>
-								<li><a href="#">Printed </a><span> (564)</span></li>
-								<li><a href="#">Applique Work </a><span> (564)</span></li>
-								<li><a href="#">Stones </a><span> (564)</span></li>
+							<?php 
+			if($SearchProductsList['Filterdata']['filter_dispatch']){ 
+			$i=0;
+			//echo "<pre>";print_r($SearchProductsList); die(); 
+				foreach($SearchProductsList['Filterdata']['filter_dispatch'] as $key=>$value){
+			?>
+			<li><div>										
+					<input id="dispatch-checkbox-<?php echo $i; ?>" class="checkbox1-custom filterdata" name="filter_dispatch[]" type="checkbox" value="<?php echo $value->p_dispatch;?>" un-checked>
+					
+					<label for="dispatch-checkbox-<?php echo $i; ?>" class="checkbox1-custom-label"><span>(<?php echo $value->countTotal;?>)</span><span><?php echo $value->p_dispatch;?></span> </label>
+										
+									</div></li> 
+			<?php 
+			$i++;
+				}
+			}
+			?>
+
+					<!--<li><div>
+							<input id="checkbox-4" class="checkbox1-custom" name="checkbox-4" type="checkbox" un-checked>
+							<label for="checkbox-4" class="checkbox1-custom-label"><span>Below 10 Days</span> <span>(647)</span></label>
+						</div></li>-->
+								
 
 							</ul>    
 						</div>
-						<div class="widget compare">
-							<h3>Compare Products</h3>
+						
+						<div class="widget">
+							<h3>Arts Style</h3>
 							<ul>
-								<li>
-									<a href="#"> Salwaar Kameez</a> 
-									<a class="remove" href="#"> X</a> 
-								</li>
-								<li>
-									<a href="#">Designer Dress</a>
-									<a class="remove" href="#"> X</a>
-								</li>
-							</ul> 
-							<a class="lixury-btn" href="#"> shop now </a>
-							<a class="lixury-btn right" href="#"> shop now </a>   
+						<?php 
+							if($SearchProductsList['Filterdata']['filter_fabric']){ 
+							$i=0;
+								foreach($SearchProductsList['Filterdata']['filter_fabric'] as $key=>$value){
+							?>
+								<li><div>
+										<input id="fabric-checkbox-<?php echo $i; ?>" class="checkbox1-custom filterdata" name="filter_fabric[]" type="checkbox" value="<?php echo $value->p_fabric;?>" un-checked>
+										<label for="fabric-checkbox-<?php echo $i; ?>" class="checkbox1-custom-label"><span>(<?php echo $value->countTotal;?>)</span> <span title="<?php echo $value->p_fabric;?>"><?php echo text_limit($value->p_fabric,25);?></span> </label>
+									</div></li>
+							<?php
+							$i++;							
+								}
+							}
+							?>	
+
+							</ul>    
 						</div>
+						
 
 					</form>
 				</div>
@@ -180,6 +199,11 @@
 					<div role="tabpanel" class="tab-pane active" id="home">
 						<div class="row">
 							<div class="product-area">
+							<?php 
+							if($SearchProductsList['data']){ 
+								foreach($SearchProductsList['data'] as $key=>$val){ //print_r($value['p_details']->id); exit;
+									$value = $val['p_details'];
+							?>
 								<div class="col-md-4 col-sm-4 col-xs-12">
 									<div class="single-product">
 										<div class="product-image fix">
@@ -198,16 +222,20 @@
 												</div>
 											</div>
 										</div>
-										<h4 class="name"><a href="#">Lorem ipsum dolor</a></h4>
+										<h4 class="name"><a href="#" title="<?php echo $value->p_name;?>"><?php echo text_limit($value->p_name,35);?></a></h4>
 										<span class="amount">
 
-											RS,1200
+											RS,<?php echo $value->p_price;?>
 										</span>
 										<div class="add-to-cart">
 											<a href="#"><i class="fa fa-shopping-cart"></i></a>
 										</div>
 									</div>
 								</div>
+							<?php 
+								}
+							}
+							?>		
 								<div class="col-md-4 col-sm-4 col-xs-12">
 									<div class="single-product">
 										<div class="product-image fix">

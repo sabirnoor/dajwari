@@ -37,15 +37,16 @@ class HomeController extends Controller
         return view('index',compact('getMenuItems','getHomeBanners','p_customer_fav','p_trending','getTrendingMenu'));
     }
 	
-	public function search(Request $request){
+	public function search(Request $request){ 
 		$post = $request->all();
 		$keywords = isset($post['q'])?$post['q']:'';
 		$cat = $post['cat'];
 		$getMenuItems = Products::getMenuItems();
 		$SearchProductsList = Products::SearchProductsList(array() , 100, $keywords, $cat);
 		$getfiltercolor = Products::getfiltercolor();
-		//echo '<pre>';print_r($SearchProductsList);
-        return view('search',compact('getMenuItems'));
+		//echo '<pre>';print_r($SearchProductsList); die();
+		
+        return view('search',compact('getMenuItems','SearchProductsList'));
     }
 	
 	public function products(Request $request){

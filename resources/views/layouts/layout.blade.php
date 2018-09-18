@@ -85,5 +85,21 @@ $action = Request::segment(1);
 		
 
     </body>
-
+<script>
+	$('.filterdata').on('change', function () {
+		
+		var val = [];
+        $(':checkbox:checked').each(function(i){
+          val[i] = $(this).val();
+        });
+		
+		if ($(this).is(":checked")) {
+			alert('checked');
+		} else {
+			alert('not checked');
+		}
+		
+	});
+ 
+</script>
 </html>
