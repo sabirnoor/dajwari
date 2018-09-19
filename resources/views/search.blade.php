@@ -34,15 +34,7 @@
 								<li><div>
 										<input id="checkbox-4" class="checkbox1-custom" name="checkbox-4" type="checkbox" un-checked>
 										<label for="checkbox-4" class="checkbox1-custom-label"><span>(647)</span> <span>Below 10 Days</span> </label>
-									</div></li>
-								<li><div>
-										<input id="checkbox-5" class="checkbox1-custom" name="checkbox-5" type="checkbox" un-checked>
-										<label for="checkbox-5" class="checkbox1-custom-label"><span>(647)</span> <span>Below 10 Days</span></label>
-									</div></li>
-								<li><div>
-										<input id="checkbox-6" class="checkbox1-custom" name="checkbox-6" type="checkbox" un-checked>
-										<label for="checkbox-6" class="checkbox1-custom-label"><span>(647)</span> <span>Below 20 Days</span></label>
-									</div></li>
+									</div></li>							
 
 							</ul>    
 						</div>-->
@@ -66,11 +58,6 @@
 				}
 			}
 			?>
-
-					<!--<li><div>
-							<input id="checkbox-4" class="checkbox1-custom" name="checkbox-4" type="checkbox" un-checked>
-							<label for="checkbox-4" class="checkbox1-custom-label"><span>Below 10 Days</span> <span>(647)</span></label>
-						</div></li>-->
 								
 
 							</ul>    
@@ -134,13 +121,13 @@
 							<h3>Arts Style</h3>
 							<ul>
 						<?php 
-							if($SearchProductsList['Filterdata']['filter_fabric']){ 
+							if($SearchProductsList['Filterdata']['filter_fabric']){ //print_r($SearchProductsList['Filterdata']['filter_fabric']); exit;
 							$i=0;
 								foreach($SearchProductsList['Filterdata']['filter_fabric'] as $key=>$value){
 							?>
 								<li><div>
-										<input id="fabric-checkbox-<?php echo $i; ?>" class="checkbox1-custom filterdata" name="filter_fabric[]" type="checkbox" value="<?php echo $value->p_fabric;?>" un-checked>
-										<label for="fabric-checkbox-<?php echo $i; ?>" class="checkbox1-custom-label"><span>(<?php echo $value->countTotal;?>)</span> <span title="<?php echo $value->p_fabric;?>"><?php echo text_limit($value->p_fabric,25);?></span> </label>
+										<input id="fabric-checkbox-<?php echo $i; ?>" class="checkbox1-custom filterdata" name="filter_fabric[]" type="checkbox" value="<?php echo $value->fabric_name;?>" un-checked>
+										<label for="fabric-checkbox-<?php echo $i; ?>" class="checkbox1-custom-label"><span>(<?php echo $value->countTotal;?>)</span> <span title="<?php echo $value->fabric_name;?>"><?php echo text_limit($value->fabric_name,25);?></span> </label>
 									</div></li>
 							<?php
 							$i++;							

@@ -151,7 +151,7 @@
                     <div class="single-banner">
                         <div class="bannar-img">
                             <a class="ban-img" href="#">
-                                <img src="{{asset('public/img/banner/2.png')}}" alt="">
+                                <img src="{{asset('public/img/banner/2.png')}}" alt=""><!-- http://localhost/dajwariadminonly/uploads/products/home_image/2_805270249f96c06ba7cd1bab4d8583f1.jpg -->
                             </a>
                         </div>
                         <div class="banner-content">
