@@ -18,3 +18,4 @@ Route::get('/', function () {
 Route::match(['get', 'post'],'/', array('uses' => 'HomeController@index'));
 Route::match(['get', 'post'],'/search', array('uses' => 'HomeController@search'));
 Route::match(['get', 'post'],'/products/{id?}/{page?}', array('uses' => 'HomeController@products'));
+Route::match(['get', 'post'],'/details/{id?}/{page?}', array('uses' => 'HomeController@details'));

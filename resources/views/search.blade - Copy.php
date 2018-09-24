@@ -11,9 +11,9 @@
     <div class="container">
         <div class="row">
 
-    <div class="col-md-3 col-xs-12" >
-        <div id="filters_col"> <a data-toggle="collapse" href="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters" id="filters_col_bt">Filters </a>
-            <div class="collapse show" id="collapseFilters">
+            
+
+            <div class="col-md-3 col-xs-12" >
                 <div class="star_rating">
                     <form method="post" action="">
                         <div class="widget">
@@ -30,13 +30,24 @@
                                 </div>							
                             </div>
                         </div>
-                        <div class="widget">
+                        <!--<div class="widget">
+                                <h3>DISCOUNT</h3>
+                                <ul>
 
-                            <h3>By Size</h3>
+                                        <li><div>
+                                                        <input id="checkbox-4" class="checkbox1-custom" name="checkbox-4" type="checkbox" un-checked>
+                                                        <label for="checkbox-4" class="checkbox1-custom-label"><span>(647)</span> <span>Below 10 Days</span> </label>
+                                                </div></li>							
+
+                                </ul>    
+                        </div>-->
+                        <div class="widget">
+                            <h3>By product Size <a style="float:right" href="<?= url('search/?cat=' . $post['cat'] . '&q=' . $post['q']) ?>">Clear Filter</a></h3>
                             <ul>
                                 <?php
                                 if ($SearchProductsList['Filterdata']['filter_size']) {
                                     $i = 0;
+                                    //echo "<pre>";print_r($SearchProductsList); die(); 
                                     foreach ($SearchProductsList['Filterdata']['filter_size'] as $key => $value) {
                                         $checked = '';
                                         if (!empty($size)) {
@@ -46,8 +57,9 @@
                                         }
                                         ?>
                                         <li><div>										
-                                            <input <?= $checked ?> id="size-checkbox-<?php echo $i; ?>" class="checkbox1-custom filter_size filterdata" name="filter_size[]" type="checkbox" value="<?php echo $value->p_size; ?>" >
-                                            <label for="size-checkbox-<?php echo $i; ?>" class="checkbox1-custom-label"><span>(<?php echo $value->countTotal; ?>)</span><span><?php echo $value->p_size; ?></span> </label>
+                                                <input <?= $checked ?> id="size-checkbox-<?php echo $i; ?>" class="checkbox1-custom filter_size filterdata" name="filter_size[]" type="checkbox" value="<?php echo $value->p_size; ?>" >
+
+                                                <label for="size-checkbox-<?php echo $i; ?>" class="checkbox1-custom-label"><span>(<?php echo $value->countTotal; ?>)</span><span><?php echo $value->p_size; ?></span> </label>
 
                                             </div></li> 
                                         <?php
@@ -55,12 +67,15 @@
                                     }
                                 }
                                 ?>
+
+
                             </ul>    
                         </div>
 
                         <div class="widget">
                             <h3>Color</h3>
                             <ul>
+
                                 <?php
                                 if ($SearchProductsList['Filterdata']['filter_color']) {
                                     $i = 0;
@@ -72,23 +87,62 @@
                                             }
                                         }
                                         ?>
+
                                         <li><div>
-                                            <input <?= $checked ?> id="color-checkbox-<?php echo $i; ?>" class="checkbox1-custom filter_color filterdata" name="filter_color[]" type="checkbox" value="<?php echo $value->color_name; ?>"  un-checked>
-                                            <label for="color-checkbox-<?php echo $i; ?>" class="checkbox1-custom-label"><span>(<?php echo $value->countTotal; ?>)</span><span><?php echo $value->color_name; ?></span> </label>
-                                        </div></li>
+                                                <input <?= $checked ?> id="color-checkbox-<?php echo $i; ?>" class="checkbox1-custom filter_color filterdata" name="filter_color[]" type="checkbox" value="<?php echo $value->color_name; ?>"  un-checked>
+                                                <label for="color-checkbox-<?php echo $i; ?>" class="checkbox1-custom-label"><span>(<?php echo $value->countTotal; ?>)</span><span><?php echo $value->color_name; ?></span> </label>
+                                            </div></li>
 
                                         <?php
                                         $i++;
                                     }
                                 }
                                 ?>
+
                             </ul> 
                         </div>
+
                         <div class="widget">
-                            <h3>BY Fabric</h3>
+                            <h3>By Delivery Days</h3>
                             <ul>
                                 <?php
-                                if ($SearchProductsList['Filterdata']['filter_fabric']) {
+                                if ($SearchProductsList['Filterdata']['filter_dispatch']) {
+                                    $i = 0;
+                                    //echo "<pre>";print_r($SearchProductsList); die(); 
+                                    foreach ($SearchProductsList['Filterdata']['filter_dispatch'] as $key => $value) {
+                                        $checked = '';
+                                        if (isset($dispatch) && !empty($dispatch)) {
+                                            if (in_array($value->p_dispatch, $dispatch)) {
+                                                $checked = 'checked="checked"';
+                                            }
+                                        }
+                                        ?>
+                                        <li><div>										
+                                                <input <?= $checked ?> id="dispatch-checkbox-<?php echo $i; ?>" class="checkbox1-custom filter_dispatch filterdata" name="filter_dispatch[]" type="checkbox" value="<?php echo $value->p_dispatch; ?>" un-checked>
+
+                                                <label for="dispatch-checkbox-<?php echo $i; ?>" class="checkbox1-custom-label"><span>(<?php echo $value->countTotal; ?>)</span><span><?php echo $value->p_dispatch; ?></span> </label>
+
+                                            </div></li> 
+                                        <?php
+                                        $i++;
+                                    }
+                                }
+                                ?>
+
+                                <!--<li><div>
+                                                <input id="checkbox-4" class="checkbox1-custom" name="checkbox-4" type="checkbox" un-checked>
+                                                <label for="checkbox-4" class="checkbox1-custom-label"><span>Below 10 Days</span> <span>(647)</span></label>
+                                        </div></li>-->
+
+
+                            </ul>    
+                        </div>
+
+                        <div class="widget">
+                            <h3>Arts Style</h3>
+                            <ul>
+                                <?php
+                                if ($SearchProductsList['Filterdata']['filter_fabric']) { //print_r($SearchProductsList['Filterdata']['filter_fabric']); exit;
                                     $i = 0;
                                     foreach ($SearchProductsList['Filterdata']['filter_fabric'] as $key => $value) {
                                         $checked = '';
@@ -99,53 +153,22 @@
                                         }
                                         ?>
                                         <li><div>
-                                            <input <?= $checked ?> id="fabric-checkbox-<?php echo $i; ?>" class="checkbox1-custom filter_fabric filterdata" name="filter_fabric[]" type="checkbox" value="<?php echo $value->id; ?>" un-checked>
-                                            <label for="fabric-checkbox-<?php echo $i; ?>" class="checkbox1-custom-label"><span>(<?php echo $value->countTotal; ?>)</span> <span title="<?php echo $value->fabric_name; ?>"><?php echo text_limit($value->fabric_name, 25); ?></span> </label>
-                                        </div></li>
+                                                <input <?= $checked ?> id="fabric-checkbox-<?php echo $i; ?>" class="checkbox1-custom filter_fabric filterdata" name="filter_fabric[]" type="checkbox" value="<?php echo $value->id; ?>" un-checked>
+                                                <label for="fabric-checkbox-<?php echo $i; ?>" class="checkbox1-custom-label"><span>(<?php echo $value->countTotal; ?>)</span> <span title="<?php echo $value->fabric_name; ?>"><?php echo text_limit($value->fabric_name, 25); ?></span> </label>
+                                            </div></li>
                                         <?php
                                         $i++;
                                     }
                                 }
-                                ?>
+                                ?>	
+
                             </ul>    
                         </div>
-                        
-                        <div class="widget">
-                            <h3>By Delivery Days</h3>
-                            <ul>
-                                <?php
-                                if ($SearchProductsList['Filterdata']['filter_dispatch']) {
-                                    $i = 0;
-                                    foreach ($SearchProductsList['Filterdata']['filter_dispatch'] as $key => $value) {
-                                        $checked = '';
-                                        if (isset($dispatch) && !empty($dispatch)) {
-                                            if (in_array($value->p_dispatch, $dispatch)) {
-                                                $checked = 'checked="checked"';
-                                            }
-                                        }
-                                        ?>
-                                        <li><div>										
-                                            <input <?= $checked ?> id="dispatch-checkbox-<?php echo $i; ?>" class="checkbox1-custom filter_dispatch filterdata" name="filter_dispatch[]" type="checkbox" value="<?php echo $value->p_dispatch; ?>" un-checked>
-                                            <label for="dispatch-checkbox-<?php echo $i; ?>" class="checkbox1-custom-label"><span>(<?php echo $value->countTotal; ?>)</span><span><?php echo $value->p_dispatch; ?></span> </label>
-                                        </div></li> 
-                                        <?php
-                                        $i++;
-                                    }
-                                }
-                                ?>
-                            </ul>    
-                        </div>
-                        
+
 
                     </form>
                 </div>
             </div>
-
-        </div>
-
-    </div>
-            
-            
             <div class="col-md-9 col-sm-12 col-xs-12">
                 <div class="row">
                     <div class="col-md-12">
@@ -200,7 +223,7 @@
                                         <div class="col-md-4 col-sm-4 col-xs-12">
                                             <div class="single-product">
                                                 <div class="product-image fix">
-                                                    <a href="<?=url('details/'.str_replace(" ", "_",$value->p_name))?>">
+                                                    <a href="product-details.html">
                                                         <img  src="{{img_src_path()}}products/small/{{$p_image[0]}}" alt="">
                                                         <img class="primary-2" src="{{img_src_path()}}products/small/{{$p_image1}}" alt="">
                                                     </a>
