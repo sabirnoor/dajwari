@@ -65,15 +65,11 @@ class HomeController extends Controller {
     }
     
     
-    public function details(Request $request) {
-        $post = $request->all();
-        $segments = $request->segment(2);
-        $start = ($request->segment(3)) ? $request->segment(3) : 0;
-        $cat = str_replace('_', ' ', $segments);
+    public function details($productName = '') {
         $getMenuItems = Products::getMenuItems();
-        //$getBrowseProductsList = Products::getBrowseProductsList(array(), 15, $cat);
-        //echo '<pre>';print_r($segments);die;
-        return view('details', compact('getMenuItems'));
+        $ProductDetails = Products::getDajwariProductDetails($productName, true);
+        //echo '<pre>';print_r($ProductDetails);die;
+        return view('details', compact('getMenuItems','ProductDetails'));
     }
 
     public function dashboard() {

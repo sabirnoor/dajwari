@@ -189,6 +189,26 @@ class Products extends Model {
           $data['total_records'] = $select->count(); */
         return $select;
     }
+    
+    public static function getDajwariProductDetails($id = '', $name = false) {
+        $data = array();
+        if($name) {
+            $name = str_replace("_", " ", $id);
+            $result = DB::table('dajwari_products')->where('p_name', $name)->first();
+            if ($result) {
+                $id = $result->id;
+            }
+        }
+        $row = DB::table('dajwari_products')->where('id', $id)->first();
+        $data['p_details'] = $row;
+        $data['p_color'] = self::getProductColorDetails($row->id);
+        $data['p_size'] = self::getProductSizeDetails($row->id);
+        $data['p_image'] = self::getProductImageDetails($row->id);
+        //echo '<pre>';print_r($data);die;
+        return $data;
+    }
+    
+    
 
     public static function get_dajwari_category_id($cat = '') {
         $data = 1;
