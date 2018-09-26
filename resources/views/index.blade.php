@@ -132,17 +132,24 @@
 <div class="banner-area pad-70">
     <div class="container">
         <div class="banner-wraper">
-            <div class="row">
+          <?php 
+			if($getHomeAdvts){ //print_r($getHomeAdvts);
+			
+			//exit;
+				//foreach($getHomeAdvts as $key=>$value){
+				}
+			?>  
+			<div class="row">
                 <div class="col-md-3 col-sm-4 col-xs-12">   
                     <div class="single-banner">
                         <div class="banner-content">
-                            <h3 class="title">NEW DESIGN SEND HER YOUR LOVE</h3>
-                            <p class="pragrap">Lorem ipsum dolor sit amet, consectetur adipisicing elit, do eiusmod tempor</p>
-                            <a class="lixury-btn" href="#"> shop now </a>	
+			<h3 class="title">{{$getHomeAdvts[1]->title1}}</h3>
+                            <p class="pragrap">{{$getHomeAdvts[1]->desc1}}</p>
+                            <a class="lixury-btn" href="{{$getHomeAdvts[1]->category1}}"> shop now </a>	
                         </div>
                         <div class="bannar-img">
                             <a href="#" class="ban-img">
-                                <img src="{{asset('public/img/banner/collection-1.jpg')}}" alt="">
+                                <img src="{{img_src_path()}}{{$getHomeAdvts[1]->home_image1}}" alt="">
                             </a>
                         </div>
                     </div>
@@ -151,33 +158,34 @@
                     <div class="single-banner">
                         <div class="bannar-img">
                             <a class="ban-img" href="#">
-                                <img src="{{asset('public/img/banner/2.png')}}" alt=""><!-- http://localhost/dajwariadminonly/uploads/products/home_image/2_805270249f96c06ba7cd1bab4d8583f1.jpg -->
+                                <img src="{{img_src_path()}}{{$getHomeAdvts[1]->home_image2}}" alt=""><!-- http://localhost/dajwariadminonly/uploads/products/home_image/2_805270249f96c06ba7cd1bab4d8583f1.jpg -->
                             </a>
                         </div>
                         <div class="banner-content">
-                            <h3 class="title">THE BIGGEST INDIAN WEDDING DRESSESS COLLECTION</h3>
+                            <h3 class="title">{{$getHomeAdvts[1]->title2}}</h3>
                             <p class="pragrap">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit, do eiusmod tempor incididunt ut labore et dolore .</p>
-                            <a class="lixury-btn" href="#"> shop now </a>
+                                {{$getHomeAdvts[1]->desc2}}</p>
+                            <a class="lixury-btn" href="{{$getHomeAdvts[1]->category2}}"> shop now </a>
                         </div>
                     </div>  
                 </div>
                 <div class="col-md-3 col-sm-4 col-xs-12">   
                     <div class="single-banner">
                         <div class="banner-content">
-                            <h3 class="title">WOMEN’S FASHION MID SEASON SALES</h3>
+                            <h3 class="title">{{$getHomeAdvts[1]->title3}}</h3>
                             <p class="pragrap">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, do eiusmod tempor</p>
-                            <a class="lixury-btn" href="#"> shop now </a>
+                                {{$getHomeAdvts[1]->desc3}}</p>
+                            <a class="lixury-btn" href="{{$getHomeAdvts[1]->category3}}"> shop now </a>
                         </div>
                         <div class="bannar-img">
                             <a href="#" class="ban-img">
-                                <img src="{{asset('public/img/banner/collection-3.jpg')}}" alt="">
+                                <img src="{{img_src_path()}}{{$getHomeAdvts[1]->home_image3}}" alt="">
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
+			
         </div>	
     </div>  
 </div>
@@ -264,52 +272,38 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="heading-title">
-                    <h4>What’s client say?</h4>
+                    <h4>What clients say?</h4>
                 </div> 
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="tst-crosol">
+				<?php 
+			if($getTestimonials){
+				foreach($getTestimonials as $key=>$value){ //print_r($value); exit;
+				//
+			?>
+            
+			
                     <div class="testimonial">
                         <div class="tstmnil-content">
-                            <p>hi, Best Boutique for Women's , Awesome fitting. Aman design wonderful dress for my daughter Marriage One of my Relative suggest Dajwari boutique for Bridal Dress.we visit there get perfect design Hand embroidery is good. Really happy with dajwari recommend this place to all friend & relative</p>
+                            <p>{{$value->comments}}</p>
                         </div>
                         <div class="info">
                             <div class="neme">
-                                <p>Anny sharma</p>
+                                <p>{{$value->name}}</p>
                             </div>
                             <div class="status">
-                                <p>Designer</p>
+                                <p>{{$value->profession}}</p>
                             </div>
                         </div>	
                     </div> 
-                    <div class="testimonial">
-                        <div class="tstmnil-content">
-                            <p>Lorem ipsum dolor sit amet, new fashion consectetur adipiscing elit. Suspendisse consequat orci new sed nibh ultricies, eget sollicitudin quam consectetur. Donec at mattis purus, ut accumsan nisl. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse consequat orci new sed nibh ultricies, eget sollicitudin quam consectetur. Donec at mattis purus, ut accumsan nisl.</p>
-                        </div>
-                        <div class="info">
-                            <div class="neme">
-                                <p>Pooja Lamba</p>
-                            </div>
-                            <div class="status">
-                                <p>Designer</p>
-                            </div>
-                        </div>	
-                    </div>
-                    <div class="testimonial">
-                        <div class="tstmnil-content">
-                            <p>hi, my self sandhya One of my friend recommended dajwari boutique for stitching & dress material. i visit there and get a perfect fit. I am happy with dajwari wonderful stitching & very unique design, reasonably priced.Excellent service it will ideally satisfy our taste and style and i suggest to all for the perfect fit & Amazing unique clothes that will show ...</p>
-                        </div>
-                        <div class="info">
-                            <div class="neme">
-                                <p>Sandhya Rathi</p>
-                            </div>
-                            <div class="status">
-                                <p>Designer</p>
-                            </div>
-                        </div>	
-                    </div>
+                <?php
+				}
+			}
+			?>    
+                    
                 </div>
             </div>
         </div>
@@ -414,10 +408,15 @@
         </div>
         <div class="row">
             <div class="carousel ind-style ">
-                <div class="col-sm-12">
+            <?php 
+			if($getBlogs){
+				foreach($getBlogs as $key=>$value){   
+			?>
+            	
+				<div class="col-sm-12">
                     <div class="single-blog-post slide-post">	
                         <div class="post-thumb">
-                            <img src="{{asset('public/img/blog/1.jpg')}}" alt="">
+                            <img src="{{img_src_path()}}blogs/{{$value->blog_image}}" alt="">
                         </div>	
                         <div class="post-area">
                             <div class="post-meta">
@@ -435,69 +434,21 @@
                                 </span>
                             </div>
                             <div class="post-content">
-                                <h3><a href="#">Tempor incididunt ut labore et dolore magna aliqua </a></h3>
-                                <p>Lorem ipsum dolor sit amete, consectetur news adipisicing sed do new fashion eiusmod tempor incididunt ut labore etel dolore magna aliqua</p>
+                                
+								<h3><a href="#">{{$value->title}} </a></h3>
+								
+                                <p>{{$value->description}}</p>
                             </div>
-                            <a class="lixury-btn" href="#"> shop now </a>
+			<a class="lixury-btn" href="{{$value->category}}"> shop now </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12">
-                    <div class="single-blog-post slide-post">	
-                        <div class="post-thumb">
-                            <img src="{{asset('public/img/blog/2.jpg')}}" alt="">
-                        </div>	
-                        <div class="post-area">
-                            <div class="post-meta">
-                                <span>
-                                    <a href="#"><i class="fa fa-calendar"></i> Oct,25</a>
-                                </span>
-                                <span>
-                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                    By 
-                                    <a href="#">admin</a>
-                                </span>
-                                <span>
-                                    <i class="fa fa-comment"></i>
-                                    <a href="#">2 comments</a>
-                                </span>
-                            </div>
-                            <div class="post-content">
-                                <h3><a href="#">Tempor incididunt ut labore et dolore magna aliqua </a></h3>
-                                <p>Lorem ipsum dolor sit amete, consectetur news adipisicing sed do new fashion eiusmod tempor incididunt ut labore etel dolore magna aliqua</p>
-                            </div>
-                            <a class="lixury-btn" href="#"> shop now </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12">
-                    <div class="single-blog-post slide-post">	
-                        <div class="post-thumb">
-                            <img src="{{asset('public/img/blog/1.jpg')}}" alt="">
-                        </div>	
-                        <div class="post-area">
-                            <div class="post-meta">
-                                <span>
-                                    <a href="#"><i class="fa fa-calendar"></i> Oct,25</a>
-                                </span>
-                                <span>
-                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                    By 
-                                    <a href="#">admin</a>
-                                </span>
-                                <span>
-                                    <i class="fa fa-comment"></i>
-                                    <a href="#">2 comments</a>
-                                </span>
-                            </div>
-                            <div class="post-content">
-                                <h3><a href="#">Tempor incididunt ut labore et dolore magna aliqua </a></h3>
-                                <p>Lorem ipsum dolor sit amete, consectetur news adipisicing sed do new fashion eiusmod tempor incididunt ut labore etel dolore magna aliqua</p>
-                            </div>
-                            <a class="lixury-btn" href="#"> shop now </a>
-                        </div>
-                    </div>
-                </div>
+				<?php
+				}
+			}
+			?>
+                
+                
             </div>
         </div>	
     </div>

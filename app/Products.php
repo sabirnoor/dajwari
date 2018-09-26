@@ -319,6 +319,41 @@ class Products extends Model {
                         ->groupBy('c1.fabric_name','c1.id')->get();
         return $select;
     }
+	
+	public static function getHomeAdvts() {
+        $data = array();
+        $query = DB::table('dajwari_home_advt as c1')
+                        ->orderBy('c1.home_id', 'ASC')->get();
+        if ($query) {
+            foreach ($query as $row) {
+                $data[$row->home_id] = $row;
+            }
+        }
+        return $data;
+    }
+	public static function getTestimonials() {
+        $data = array();
+        $query = DB::table('dajwari_testimonial as c1')
+                        ->orderBy('c1.tes_id', 'ASC')->get();
+        if ($query) {
+            foreach ($query as $row) {
+                $data[$row->tes_id] = $row;
+            }
+        }
+        return $data;
+    }
+	
+	public static function getBlogs() {
+        $data = array();
+        $query = DB::table('dajwari_blog as c1')
+                        ->orderBy('c1.blog_id', 'ASC')->get();
+        if ($query) {
+            foreach ($query as $row) {
+                $data[$row->blog_id] = $row;
+            }
+        }
+        return $data;
+    }
 
 }
 
