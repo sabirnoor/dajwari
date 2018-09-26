@@ -1,5 +1,9 @@
 @extends('layouts.layout')
 @section('content')
+<?php
+$p_details = $ProductDetails['p_details'];
+$p_image = $ProductDetails['p_image'];
+?>
 <!-- header area end-->
 <!-- search area -->
 <div class="search-area">
@@ -15,28 +19,30 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-5 col-sm-6 col-xs-12 ">
-                        <div class="show" href="img/product/1.jpg">
-                            <img src="img/product/1.jpg" id="show-img">
+                        <div class="show" href="{{img_src_path()}}products/{{$p_image[0]}}">
+                            <img src="{{img_src_path()}}products/{{$p_image[0]}}" id="show-img">
                         </div>
                         <div class="small-img">
-                            <img src="img/online_icon_right@2x.png" class="icon-left" alt="" id="prev-img">
+                            <img src="{{asset('public/img/online_icon_right@2x.png')}}" class="icon-left" alt="" id="prev-img">
                             <div class="small-container">
                                 <div id="small-img-roll">
-                                    <img src="img/product/1.jpg" class="show-small-img" alt="">
-                                    <img src="img/product/2.jpg" class="show-small-img" alt="">
-                                    <img src="img/product/3.jpg" class="show-small-img" alt="">
-                                    <img src="img/product/4.jpg" class="show-small-img" alt="">
-                                    <img src="img/product/5.jpg" class="show-small-img" alt="">
-                                    <img src="img/product/6.jpg" class="show-small-img" alt="">
+                                    @if (count($p_image) > 0)
+                                        @foreach ($p_image as $img)
+                                    <img src="{{img_src_path()}}products/{{$img}}" class="show-small-img"  alt="">
+                                        @endforeach
+                                    @else
+                                    <img src="{{asset('public/img/product/2.jpg')}}" class="show-small-img" alt="">
+                                    @endif
+                                    
                                 </div>
                             </div>
-                            <img src="img/online_icon_right@2x.png" class="icon-right" alt="" id="next-img">
+                            <img src="{{asset('public/img/online_icon_right@2x.png')}}" class="icon-right" alt="" id="next-img">
                         </div>
                     </div>
                     <div class="col-md-7 col-sm-6 col-xs-12">
                         <div class="single-pro-details">
                             <div class="product-details-shop ">
-                                <h4 class="name">Adipisicing sed do</h4>
+                                <h4 class="name">{{$p_details->p_name}}</h4>
                                 <div class="reating">
                                     <span class="star-reating">
                                         <i class="fa fa-star" aria-hidden="true"></i>
@@ -48,7 +54,7 @@
                                     </span>
                                 </div>
                                 <span class="amount">
-                                    $185.00
+                                    INR {{$p_details->p_price}} 
                                 </span>
                                 <p>Lorem ipsum dolor sit amete, consectetur news adipisicing sed do new fashion eiusmod tempor incididunt ut labore etel dolore magna aliqua. Ut enim news minimveniam, quis nostrud exercitation new ullamco laboris nisi news commodo consequat consectetur adipisicing. Fashion double layering. Lorem ipsum dolor sit amete, consectetur adipisicing sed do new eiusmod tempor incididunt ut labore etel dolore magna aliqua.</p>
                                 <div class="col-md-5">

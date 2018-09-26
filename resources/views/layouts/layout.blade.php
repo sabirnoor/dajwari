@@ -35,6 +35,7 @@ $action = Request::segment(1);
         <!-- style css -->
         <link rel="stylesheet" href="{{asset('public/style.css') }}">
         <link rel="stylesheet" href="{{asset('public/css/responsive.css') }}">
+        <link rel="stylesheet" href="{{asset('public/css/main.css') }}">
         <!-- modernizr js -->
         <script src="{{asset('public/js/vendor/modernizr-2.8.3.min.js') }}"></script>
     </head>
