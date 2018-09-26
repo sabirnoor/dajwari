@@ -33,8 +33,11 @@ class HomeController extends Controller {
         $getHomeBanners = Products::getHomeBanners();
         $p_customer_fav = Products::getProductsList(array('p_customer_fav' => 1), 8);
         $p_trending = Products::getProductsList(array('p_trending' => 1), 8);
+		$getTestimonials = Products::getTestimonials();
+		$getBlogs = Products::getBlogs();
+		$getHomeAdvts = Products::getHomeAdvts();
         //echo '<pre>';print_r($getTrendingMenu);die;
-        return view('index', compact('getMenuItems', 'getHomeBanners', 'p_customer_fav', 'p_trending', 'getTrendingMenu'));
+        return view('index', compact('getMenuItems', 'getHomeBanners', 'p_customer_fav', 'p_trending', 'getTrendingMenu','getHomeAdvts','getTestimonials','getBlogs'));
     }
 
     public function search(Request $request) {
