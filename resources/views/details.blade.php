@@ -60,7 +60,7 @@ $p_image = $ProductDetails['p_image'];
                                 <div class="col-md-5">
                                     <div class="country-select">
                                         <label>Size <span class="required">*</span></label>
-                                        <select>
+                                        <select name="size" id="size">
                                             <option value="9" selected="selected">Choose Size...</option>
                                             <option value="12">32 (Ships in 25 days)</option>
                                             <option value="24">34 (Ships in 25 days)</option>
@@ -80,7 +80,7 @@ $p_image = $ProductDetails['p_image'];
                                 <div class="pad-50"></div>
 
                                 <div class="product-action">
-                                    <a class="add-tocart" href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Add To Cart">Add To Cart</a>
+                                    <a class="add-tocart" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Add To Cart">Add To Cart</a>
                                     <a href="#" data-toggle="tooltip" title="" data-original-title="Mail To"><i class="fa fa-envelope"></i></a>
                                     <a href="#" data-toggle="tooltip" title="" data-original-title="Wishlist"><i class="fa fa-heart"></i></a>
                                     <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Compare"><i class="fa fa-retweet"></i></a>
@@ -312,4 +312,12 @@ $p_image = $ProductDetails['p_image'];
         </div>
     </div>
 </div>
+<form action="{{ url('/cart') }}" method="POST" class="AddToCart">
+    {!! csrf_field() !!}
+    <input type="hidden" name="id" value="{{ $p_details->id }}">
+    <input type="hidden" name="name" value="{{ $p_details->p_name }}">
+    <input type="hidden" name="price" value="{{ $p_details->p_price }}">
+    <input type="hidden" name="p_size" id="p_size" value="">
+    <input type="hidden" name="image" id="image" value="{{img_src_path()}}products/thumb/{{$img}}">
+</form>
 @endsection

@@ -9,6 +9,7 @@ use DB;
 use App\DajwariCategories;
 use App\Products;
 use Validator;
+use Cart;
 
 class HomeController extends Controller {
 
@@ -36,7 +37,7 @@ class HomeController extends Controller {
 		$getTestimonials = Products::getTestimonials();
 		$getBlogs = Products::getBlogs();
 		$getHomeAdvts = Products::getHomeAdvts();
-        //echo '<pre>';print_r($getTrendingMenu);die;
+        //echo '<pre>';print_r($getBlogs);die;
         return view('index', compact('getMenuItems', 'getHomeBanners', 'p_customer_fav', 'p_trending', 'getTrendingMenu','getHomeAdvts','getTestimonials','getBlogs'));
     }
 
@@ -71,7 +72,11 @@ class HomeController extends Controller {
     public function details($productName = '') {
         $getMenuItems = Products::getMenuItems();
         $ProductDetails = Products::getDajwariProductDetails($productName, true);
-        //echo '<pre>';print_r($ProductDetails);die;
+        if(!$ProductDetails) {
+            return redirect(url('/'));
+        }
+        $cart = Cart::content();
+        //echo '<pre>';print_r($cart);die;
         return view('details', compact('getMenuItems','ProductDetails'));
     }
 

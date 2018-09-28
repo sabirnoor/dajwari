@@ -162,19 +162,19 @@ class Products extends Model {
     public static function getBrowseProductsList($cond = array(), $limit = 20, $cat = '') {
         $data = array();
         $select = DB::table('dajwari_products as c1')
-            ->select('c1.*', 'c2.cat_name')
-            ->leftjoin('dajwari_categories as c2', 'c1.cat_id', '=', 'c2.id')
-            ->when($cond, function ($query, $cond) {
-                if (count($cond)) {
-                    foreach ($cond as $key => $val) {
-                        return $query->where('c1.' . $key . '', '' . $val . '');
-                    }
-                }
-            })
-            ->when($cat, function ($query, $cat) {
-                return $query->where('c2.cat_name', 'like', '%' . $cat . '%');
-            })
-            ->orderBy('c1.id', 'DESC')->paginate($limit);
+                        ->select('c1.*', 'c2.cat_name')
+                        ->leftjoin('dajwari_categories as c2', 'c1.cat_id', '=', 'c2.id')
+                        ->when($cond, function ($query, $cond) {
+                            if (count($cond)) {
+                                foreach ($cond as $key => $val) {
+                                    return $query->where('c1.' . $key . '', '' . $val . '');
+                                }
+                            }
+                        })
+                        ->when($cat, function ($query, $cat) {
+                            return $query->where('c2.cat_name', 'like', '%' . $cat . '%');
+                        })
+                        ->orderBy('c1.id', 'DESC')->paginate($limit);
         /* if ($select) {
           $counter = 0;
           foreach ($select as $row) {
@@ -189,26 +189,26 @@ class Products extends Model {
           $data['total_records'] = $select->count(); */
         return $select;
     }
-    
+
     public static function getDajwariProductDetails($id = '', $name = false) {
         $data = array();
-        if($name) {
+        if ($name) {
             $name = str_replace("_", " ", $id);
             $result = DB::table('dajwari_products')->where('p_name', $name)->first();
             if ($result) {
                 $id = $result->id;
             }
         }
-        $row = DB::table('dajwari_products')->where('id', $id)->first();
-        $data['p_details'] = $row;
-        $data['p_color'] = self::getProductColorDetails($row->id);
-        $data['p_size'] = self::getProductSizeDetails($row->id);
-        $data['p_image'] = self::getProductImageDetails($row->id);
-        //echo '<pre>';print_r($data);die;
-        return $data;
+        if($id <> '' && (integer)$id > 0) {
+            $row = DB::table('dajwari_products')->where('id', $id)->first();
+            $data['p_details'] = $row;
+            $data['p_color'] = self::getProductColorDetails($row->id);
+            $data['p_size'] = self::getProductSizeDetails($row->id);
+            $data['p_image'] = self::getProductImageDetails($row->id);
+            //echo '<pre>';print_r($data);die;
+            return $data;
+        }
     }
-    
-    
 
     public static function get_dajwari_category_id($cat = '') {
         $data = 1;
@@ -224,14 +224,14 @@ class Products extends Model {
 
     public static function SearchProductsList($cond = null, $limit = null, $keywords = null, $cat = null) {
         //echo '<pre>';print_r($cond['size']); die();
-        $size = isset($cond['size'])?$cond['size']:'';
-        $color = isset($cond['color'])?$cond['color']:'';
-        $fabric = isset($cond['fabric'])?$cond['fabric']:'';
-        $dispatch = isset($cond['dispatch'])?$cond['dispatch']:'';
+        $size = isset($cond['size']) ? $cond['size'] : '';
+        $color = isset($cond['color']) ? $cond['color'] : '';
+        $fabric = isset($cond['fabric']) ? $cond['fabric'] : '';
+        $dispatch = isset($cond['dispatch']) ? $cond['dispatch'] : '';
         $data = array();
         $Filterdata = array();
         $select = DB::table('dajwari_products as c1')
-                        ->select('c1.id','c1.cat_id','c1.p_name','c1.p_code','c1.p_short_desc','c1.p_fabric','c1.p_weight','c1.p_price','c1.p_availablity','c1.p_dispatch','c1.p_long_desc','c1.stiching_cost','c1.p_qty', 'c2.cat_name')
+                        ->select('c1.id', 'c1.cat_id', 'c1.p_name', 'c1.p_code', 'c1.p_short_desc', 'c1.p_fabric', 'c1.p_weight', 'c1.p_price', 'c1.p_availablity', 'c1.p_dispatch', 'c1.p_long_desc', 'c1.stiching_cost', 'c1.p_qty', 'c2.cat_name')
                         ->leftjoin('dajwari_categories as c2', 'c1.cat_id', '=', 'c2.id')
                         ->leftjoin('dajwari_products_sizes as c3', 'c1.id', '=', 'c3.p_id')
                         ->leftjoin('dajwari_products_colors as c4', 'c1.id', '=', 'c4.p_id')
@@ -253,8 +253,8 @@ class Products extends Model {
                         ->when($limit, function ($query, $limit) {
                             return $query->limit($limit);
                         })
-                        ->groupBy('c1.id','c1.cat_id','c1.p_name','c1.p_code','c1.p_short_desc','c1.p_fabric','c1.p_weight','c1.p_price','c1.p_availablity','c1.p_dispatch','c1.p_long_desc','c1.stiching_cost','c1.p_qty','c2.cat_name')->orderBy('c1.p_price', 'ASC')->get();
-                        
+                        ->groupBy('c1.id', 'c1.cat_id', 'c1.p_name', 'c1.p_code', 'c1.p_short_desc', 'c1.p_fabric', 'c1.p_weight', 'c1.p_price', 'c1.p_availablity', 'c1.p_dispatch', 'c1.p_long_desc', 'c1.stiching_cost', 'c1.p_qty', 'c2.cat_name')->orderBy('c1.p_price', 'ASC')->get();
+
         if ($select) {
             $counter = 0;
             foreach ($select as $row) {
@@ -330,17 +330,17 @@ class Products extends Model {
 
     public static function getfilterfabric($keywords = null, $cat = null) {
         $select = DB::table('dajwari_fabric as c1')
-                        ->select('c1.fabric_name','c1.id', DB::raw("count(c1.fabric_name) as countTotal"))
+                        ->select('c1.fabric_name', 'c1.id', DB::raw("count(c1.fabric_name) as countTotal"))
                         ->join('dajwari_products as c2', 'c1.id', '=', 'c2.p_fabric')
                         ->leftjoin('dajwari_categories as c3', 'c2.cat_id', '=', 'c3.id')
                         ->when($keywords, function ($query, $keywords) {
                             return $query->where('c3.cat_name', 'like', '%' . $keywords . '%');
                         })
-                        ->groupBy('c1.fabric_name','c1.id')->get();
+                        ->groupBy('c1.fabric_name', 'c1.id')->get();
         return $select;
     }
-	
-	public static function getHomeAdvts() {
+
+    public static function getHomeAdvts() {
         $data = array();
         $query = DB::table('dajwari_home_advt as c1')
                         ->orderBy('c1.home_id', 'ASC')->get();
@@ -351,7 +351,8 @@ class Products extends Model {
         }
         return $data;
     }
-	public static function getTestimonials() {
+
+    public static function getTestimonials() {
         $data = array();
         $query = DB::table('dajwari_testimonial as c1')
                         ->orderBy('c1.tes_id', 'ASC')->get();
@@ -362,8 +363,8 @@ class Products extends Model {
         }
         return $data;
     }
-	
-	public static function getBlogs() {
+
+    public static function getBlogs() {
         $data = array();
         $query = DB::table('dajwari_blog as c1')
                         ->orderBy('c1.blog_id', 'ASC')->get();

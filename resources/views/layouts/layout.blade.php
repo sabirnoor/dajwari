@@ -92,6 +92,45 @@ $action = Request::segment(1);
         <script type="text/javascript" src="{{asset('public/lazy-master/jquery.lazy.plugins.min.js') }}"></script>
         <!-- main js -->
         <script src="{{asset('public/js/main.js') }}"></script>
+        
+        <?php if($action == 'details'){ ?>
+        <script type="text/javascript">
+            $('.add-tocart').on('click', function () {
+                var size = $('#size').val();
+                $('#p_size').val(size);
+                $('.AddToCart').submit();
+            });
+        </script>
+        <?php } ?>
+        <?php if($action == 'cart'){ ?>
+        <script>
+             $(document).ready(function() {
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $('.quantity').on('change', function() {
+                    var id = $(this).attr('data-id')
+                    $.ajax({
+                      type: "PATCH",
+                      url: '{{ url("/cart") }}' + '/' + id,
+                      data: {
+                        'quantity': this.value,
+                      },
+                      success: function(data) {
+                        window.location.href = '{{ url('/cart') }}';
+                      }
+                    });
+
+                });
+
+            });
+
+        </script>
+        <?php } ?>
 	<?php if($action == 'search'){ ?>
         <script type="text/javascript">
             <!--filter Expand collapse js-->	
@@ -300,6 +339,7 @@ $action = Request::segment(1);
         </script>
         
         <?php } ?>
+        
     </body>
 
 </html>

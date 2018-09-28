@@ -1,4 +1,4 @@
-<?php 
+<?php
 //print_r($getMenuItems);
 ?>
 <header class="header-2">
@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-md-2 col-sm-2 col-xs-12">
                     <div class="logo">
-                        <a href="/"><img src="{{asset('public/img/logo/logo.png')}}" alt=""></a>
+                        <a href="{{url('')}}"><img src="{{asset('public/img/logo/logo.png')}}" alt=""></a>
                     </div>   
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-12" align="center">
@@ -31,48 +31,8 @@
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <div class="header-wocom">
                         <div class="header-userinfo">
-                            <a class="icon-heaher check-cont" href="#"><i class="fa fa-shopping-cart"></i><span>2</span> ITEMS</a>
-                            <ul class="shop-cart">
-                                <li>
-                                    <div class="sop-pro">
-                                        <div class="img-cart">
-                                            <a href="#"><img src="{{asset('public/img/cart/1.jpg')}}" alt=""></a>
-                                        </div>
-                                        <div class="img-dtil">
-                                            <h4><a href="#">Commodo New</a></h4>
-                                            <span class="quantity">
-                                                1 × 
-                                                <span class="amount">$169.00</span>
-                                            </span>
-                                        </div>
-                                        <div class="close-x">
-                                            <a href="#">X</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="sop-pro">
-                                        <div class="img-cart">
-                                            <a href="#"><img src="{{asset('public/img/cart/1.jpg')}}" alt=""></a>
-                                        </div>
-                                        <div class="img-dtil">
-                                            <h4><a href="#">Commodo New</a></h4>
-                                            <span class="quantity">
-                                                1 × 
-                                                <span class="amount">$169.00</span>
-                                            </span>
-                                        </div>
-                                        <div class="close-x">
-                                            <a href="#">X</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li><p class="total">Total: <span class="amount">$523.00</span></p></li>
-                                <li>
-                                    <div class="view"><a href="checkout.html">Checkout</a></div>
-                                    <div class="chack-out"><a href="cart.html">View Cart</a></div>
-                                </li>
-                            </ul>
+                            <a class="icon-heaher check-cont" href="{{url('cart')}}"><i class="fa fa-shopping-cart"></i><span>{{ Cart::instance('default')->count(false) }}</span> ITEMS</a>
+                            
                         </div>
                         <div class="header-language">
                             <a class="icon-heaher wish-cont" href="#"><i class="fa fa-cog"></i> 0 WISHLIST</a>
@@ -114,59 +74,66 @@
                             <nav>
                                 <ul class="main">
                                     <li class="active "><a class="main-a" href="index.html">Home</a></li>
-									<?php if(count($getMenuItems)) { foreach($getMenuItems as $k1=>$v1) { ?>
-                                    <li class="static"><a class="main-a" href="#"><span><?=($v1['cat_name'])?></span></a>
-                                        <div class="mega-menu">
-                                            <div class="mega-menu-def">
-											<?php if(isset($v1['childs']) && is_array($v1['childs']) && count($v1['childs'])) { foreach($v1['childs'] as $k2=>$v2) { $cat_name2 = str_replace(" ", "_",$v2['cat_name']);?>	
-                                                <div class="col-md-3 col-sm-3">
-                                                    <span class="Column-one">
-                                                        <a class="title-dropsown" href="{{url('products/'.$cat_name2)}}"><?=($v2['cat_name'])?></a>
-														<?php if(isset($v2['childs']) && is_array($v2['childs']) && count($v2['childs'])) { foreach($v2['childs'] as $k3=>$v3) { $cat_name3 = str_replace(" ", "_",$v3['cat_name']);?>
-                                                        <a href="{{url('products/'.$cat_name3)}}"><?=ucwords($v3['cat_name'])?></a>
-														<?php } } ?>   
-                                                    </span>
-                                                </div>
-												 <?php } } ?>
-												<!--<div class="col-md-2 col-sm-2">
-                                                    <span class="Column-one">
-                                                        <a class="title-dropsown" href="#">Product Page</a>
-                                                        <a href="#">Standard Product</a>
-                                                        <a href="#">Variable Product</a>
-                                                        <a href="#">External Product</a>
-                                                        <a href="#">Group Product</a>   
-                                                    </span>
-                                                </div>
-												
-												<div class="col-md-2 col-sm-2">
-                                                    <span class="Column-one">
-                                                        <a class="title-dropsown" href="#">Product Page</a>
-                                                        <a href="#">Standard Product</a>
-                                                        <a href="#">Variable Product</a>
-                                                        <a href="#">External Product</a>
-                                                        <a href="#">Group Product</a>   
-                                                    </span>
-                                                </div>-->
-                                                
-                                                
-                                                
-                                                <div class="col-md-3 col-sm-3">
-                                                    <div class="img-widget">
-													<?php if(isset($v2['cat_image']) && $v2['cat_image'] <> '') { ?>
-                                                        <a href="#"><img src="{{img_src_path()}}{{$v2['cat_image']}}" alt=""></a>
-														<?php } else { ?>
-                                                        <a href="#"><img src="{{asset('public/img/largmenu/Party_Wear.png')}}" alt=""></a>
-														<?php } ?>
+                                    <?php if (count($getMenuItems)) {
+                                        foreach ($getMenuItems as $k1 => $v1) { ?>
+                                            <li class="static"><a class="main-a" href="#"><span><?= ($v1['cat_name']) ?></span></a>
+                                                <div class="mega-menu">
+                                                    <div class="mega-menu-def">
+        <?php if (isset($v1['childs']) && is_array($v1['childs']) && count($v1['childs'])) {
+            foreach ($v1['childs'] as $k2 => $v2) {
+                $cat_name2 = str_replace(" ", "_", $v2['cat_name']); ?>	
+                                                                <div class="col-md-3 col-sm-3">
+                                                                    <span class="Column-one">
+                                                                        <a class="title-dropsown" href="{{url('products/'.$cat_name2)}}"><?= ($v2['cat_name']) ?></a>
+                <?php if (isset($v2['childs']) && is_array($v2['childs']) && count($v2['childs'])) {
+                    foreach ($v2['childs'] as $k3 => $v3) {
+                        $cat_name3 = str_replace(" ", "_", $v3['cat_name']); ?>
+                                                                                <a href="{{url('products/'.$cat_name3)}}"><?= ucwords($v3['cat_name']) ?></a>
+                    <?php }
+                } ?>   
+                                                                    </span>
+                                                                </div>
+            <?php }
+        } ?>
+                                                        <!--<div class="col-md-2 col-sm-2">
+            <span class="Column-one">
+                <a class="title-dropsown" href="#">Product Page</a>
+                <a href="#">Standard Product</a>
+                <a href="#">Variable Product</a>
+                <a href="#">External Product</a>
+                <a href="#">Group Product</a>   
+            </span>
+        </div>
+                                                        
+                                                        <div class="col-md-2 col-sm-2">
+            <span class="Column-one">
+                <a class="title-dropsown" href="#">Product Page</a>
+                <a href="#">Standard Product</a>
+                <a href="#">Variable Product</a>
+                <a href="#">External Product</a>
+                <a href="#">Group Product</a>   
+            </span>
+        </div>-->
+
+
+
+                                                        <div class="col-md-3 col-sm-3">
+                                                            <div class="img-widget">
+        <?php if (isset($v2['cat_image']) && $v2['cat_image'] <> '') { ?>
+                                                                    <a href="#"><img src="{{img_src_path()}}{{$v2['cat_image']}}" alt=""></a>
+        <?php } else { ?>
+                                                                    <a href="#"><img src="{{asset('public/img/largmenu/Party_Wear.png')}}" alt=""></a>
+                                            <?php } ?>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
-                                                
-                                            </div>
-                                        </div>
-                                    </li>
-									<?php 
-										}
-									}
-									?>
+                                            </li>
+        <?php
+    }
+}
+?>
                                     <!--<li><a class="main-a" href="#">Kutris</a></li>
                                     <li><a class="main-a" href="#">Indowstern</a></li>
                                     <li><a class="main-a" href="#">Bridal</a></li>
