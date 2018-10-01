@@ -41,10 +41,10 @@
                                                         <label>Email/Mobile Number <span class="required">*</span></label>
                                                         <input type="text" autocomplete="off" autofocus placeholder="Enter Email/Mobile Number" class="user">
                                                     </p>
-                                                    <!--<p class="form-row-last setpass">
+                                                    <p class="form-row-last setpass">
                                                         <label>Enter Password  <span class="required">*</span></label>
-                                                        <input type="password" autocomplete="off" placeholder="Enter Password" class="setpass">
-                                                    </p>-->
+                                                        <input type="password" autocomplete="off" placeholder="Enter Password" class="pass">
+                                                    </p>
                                                     <p class="form-row">					
                                                         <input type="submit" value="Continue" class="checkaccount">
                                                         <label>

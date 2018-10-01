@@ -370,11 +370,12 @@
     });
     $('.checkaccount').click(function (){
         var user = $('.user').val();
-        var action = $('.checkuser').val();
+		var pass = $('.pass').val(); 
+        var action = $('.checkuser').val(); //alert(user); alert(pass);
         $.ajax({
             url:action,
             type:'POST',
-            data:{user:user},
+            data:{user:user,password:pass},
             dataType:'json',
             success:function(result){
                 if(result.success){
