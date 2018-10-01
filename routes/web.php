@@ -22,5 +22,6 @@ Route::match(['get', 'post'],'/details/{id?}/{page?}', array('uses' => 'HomeCont
 //Route::match(['get', 'post'],'/destroy/{id?}', array('uses' => 'CartController@destroy'));
 //Route::match(['get', 'post'],'/cart', array('uses' => 'CartController@index'));
 Route::match(['get', 'post'],'/checkout', array('uses' => 'CartController@checkout'));
+Route::match(['get', 'post'],'/checkuser', array('uses' => 'AccountController@checkuser'));
 
 Route::resource('cart', 'CartController');

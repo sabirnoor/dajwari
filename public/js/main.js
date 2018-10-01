@@ -363,8 +363,32 @@
     }
     
     
-    
-    
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $('.checkaccount').click(function (){
+        var user = $('.user').val();
+        var action = $('.checkuser').val();
+        $.ajax({
+            url:action,
+            type:'POST',
+            data:{user:user},
+            dataType:'json',
+            success:function(result){
+                if(result.success){
+                    alert("Login Successfully");
+                }else{
+                    alert(result.message);return false;
+                }
+            },
+            error:function(result){
+                alert('Opps something wrong!!');return false;
+            }
+	});
+        return false;
+    });
     
     
     

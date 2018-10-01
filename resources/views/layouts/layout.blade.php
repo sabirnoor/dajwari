@@ -92,7 +92,13 @@ $action = Request::segment(1);
         <script type="text/javascript" src="{{asset('public/lazy-master/jquery.lazy.plugins.min.js') }}"></script>
         <!-- main js -->
         <script src="{{asset('public/js/main.js') }}"></script>
-        
+        <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        </script>
         <?php if($action == 'details'){ ?>
         <script type="text/javascript">
             $('.add-tocart').on('click', function () {

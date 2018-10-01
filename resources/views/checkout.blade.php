@@ -35,24 +35,23 @@
                                     <div class="well">
                                         <div id="checkout-login" class="coupon-content">
                                             <div class="coupon-info">
-                                                <p class="coupon-text">Quisque gravida turpis sit amet nulla posuere lacinia. Cras sed est sit amet ipsum luctus.</p>
-                                                <form action="checkout.html">
+                                                <p class="coupon-text">Easily Track Orders, Hassle free Returns | Get Relevant Alerts and Recommendation</p>
+                                                <form>
                                                     <p class="form-row-first">
-                                                        <label>Username or email <span class="required">*</span></label>
-                                                        <input type="text">
+                                                        <label>Email/Mobile Number <span class="required">*</span></label>
+                                                        <input type="text" autocomplete="off" autofocus placeholder="Enter Email/Mobile Number" class="user">
                                                     </p>
-                                                    <p class="form-row-last">
-                                                        <label>Password  <span class="required">*</span></label>
-                                                        <input type="text">
-                                                    </p>
+                                                    <!--<p class="form-row-last setpass">
+                                                        <label>Enter Password  <span class="required">*</span></label>
+                                                        <input type="password" autocomplete="off" placeholder="Enter Password" class="setpass">
+                                                    </p>-->
                                                     <p class="form-row">					
-                                                        <input type="submit" value="Login">
+                                                        <input type="submit" value="Continue" class="checkaccount">
                                                         <label>
                                                             <input type="checkbox">
                                                             Remember me 
                                                         </label>
                                                     </p>
-                                                    
                                                 </form>
                                             </div>
                                         </div>
@@ -124,5 +123,5 @@
     </div>
 </div>
 
-
+<input type="hidden" value="{{url('checkuser')}}" class="checkuser">
 @endsection
