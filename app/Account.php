@@ -56,11 +56,15 @@ class Account extends Model {
 			Session::save();
 		}
 		//print_r(end($query));
-		print_r(Session::get('user'));
+		//print_r(Session::get('user'));
 		
 		
         return $data;
     }
+	
+	public static function delivery($data){
+	  return $last_id = DB::table('dajwari_deliverAddress')->insertGetId($data);
+	}
 
 }
 

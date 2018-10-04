@@ -38,13 +38,28 @@ class AccountController extends Controller {
 		//echo '<pre>';print_r($getUserList);die;
 		if($getUserList->userexists==1){
 			$loginby = $getUserList->user_loginby;
-			$getUserList = Account::userlogin($user,$password,$loginby);
+			$getUser = Account::userlogin($user,$password,$loginby);
 		}
 		else{
 			//$getUserList = Account::userregister();
 		}
-		
+		$getUser['success'] = 1;
+		return json_encode($getUser);
         //return view('index', compact('getMenuItems', 'getHomeBanners', 'p_customer_fav', 'p_trending', 'getTrendingMenu','getHomeAdvts','getTestimonials','getBlogs'));
+    }
+	
+	
+	
+	 public function deliverAddress(Request $request) {
+        $post = $request->all();
+        $data = array(
+		               'address' => $post['address'],
+					   'city' => $post['city'],
+					   'state' => $post['state'],
+					   'zipcode' => $post['zipcode']
+					  );
+	    echo $insertDelivery = Account::delivery($data);
+		
     }
 
     

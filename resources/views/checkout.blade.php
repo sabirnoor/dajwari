@@ -64,11 +64,34 @@
                                     <div class="well">
                                         <div id="checkout_coupon" class="coupon-checkout-content">
                                             <div class="coupon-info">
-                                                <form action="checkout.html">
-                                                    <p class="checkout-coupon">
-                                                        <input type="text" placeholder="Coupon code">
-                                                        <input type="submit" value="Apply Coupon">
+                                                <form >
+                                                   
+													<p class="form-row-first">
+                                                        <label>Address<span class="required">*</span></label>
+                                                        <input type="text" autocomplete="off" autofocus placeholder="Enter Address" class="user" name="address" id="address">
                                                     </p>
+													<p class="form-row-first">
+                                                        <label>City<span class="required">*</span></label>
+                                                        <input type="text" autocomplete="off" autofocus placeholder="Enter City" class="user" name="city" id="city">
+                                                    </p>
+													
+													<p class="form-row-first">
+                                                        <label>Zip Code<span class="required">*</span></label>
+                                                        <input type="text" autocomplete="off" autofocus placeholder="Enter Zip Code" class="user" name="zipcode" id="zipcode">
+                                                    </p>
+													
+													<p class="form-row-first">
+                                                        <label>State<span class="required">*</span></label>
+                                                        <input type="text" autocomplete="off" autofocus placeholder="Enter State" class="user" name="state" id="state">
+                                                    </p>
+													<p class="form-row">
+                                                        <input type="submit" value="Continue" class="deliverAddress">
+                                                        <label>
+                                                            <input type="checkbox">
+                                                            Remember me 
+                                                        </label>
+                                                    </p>
+													
                                                 </form>
                                             </div>
                                         </div>

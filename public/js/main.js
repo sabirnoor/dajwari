@@ -377,6 +377,32 @@
             type:'POST',
             data:{user:user,password:pass},
             dataType:'json',
+            success:function(result){ //alert(result);
+                if(result.success){
+                    alert("Login Successfully");
+                }else{
+                    alert(result.message);return false;
+                }
+            },
+            error:function(result){
+                alert('Opps something wrong!!');return false;
+            }
+	});
+        return false;
+    });
+	
+	
+	 $('.deliverAddress').click(function (){ alert(1);
+        var address = $('#address').val();
+		var city = $('#city').val(); 
+		var state = $('#state').val();
+		var zipcode = $('#zipcode').val(); 
+        var action = "{{url('deliverAddress')}}"; //alert(user); alert(pass);
+        $.ajax({
+            url:action,
+            type:'POST',
+            data:{address:address,city:city,state:state,zipcode:zipcode},
+            dataType:'json',
             success:function(result){
                 if(result.success){
                     alert("Login Successfully");
@@ -390,11 +416,6 @@
 	});
         return false;
     });
-    
-    
-    
-    
-    
     
         
 })(jQuery); 
