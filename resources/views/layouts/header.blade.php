@@ -75,8 +75,8 @@
                                 <ul class="main">
                                     <li class="active "><a class="main-a" href="index.html">Home</a></li>
                                     <?php if (count($getMenuItems)) {
-                                        foreach ($getMenuItems as $k1 => $v1) { ?>
-                                            <li class="static"><a class="main-a" href="#"><span><?= ($v1['cat_name']) ?></span></a>
+                                        foreach ($getMenuItems as $k1 => $v1) { $cat_name1 = str_replace(" ", "_", $v1['cat_name']);?>
+                                            <li class="static"><a class="main-a" href="{{url('products/'.$cat_name1)}}"><span><?= ($v1['cat_name']) ?></span></a>
                                                 <div class="mega-menu">
                                                     <div class="mega-menu-def">
         <?php if (isset($v1['childs']) && is_array($v1['childs']) && count($v1['childs'])) {
