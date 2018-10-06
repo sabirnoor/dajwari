@@ -160,34 +160,68 @@ class Products extends Model {
     }
 
     public static function getBrowseProductsList($cond = array(), $limit = 20, $cat = '') {
+		
+		$size = isset($cond['size']) ? $cond['size'] : '';
+        $color = isset($cond['color']) ? $cond['color'] : '';
+        $fabric = isset($cond['fabric']) ? $cond['fabric'] : '';
+        $dispatch = isset($cond['dispatch']) ? $cond['dispatch'] : '';
+		
         $data = array();
+		$Filterdata = array();
+		
         $select = DB::table('dajwari_products as c1')
-                        ->select('c1.*', 'c2.cat_name')
+                        ->select('c1.id', 'c1.cat_id', 'c1.p_name', 'c1.p_code', 'c1.p_short_desc', 'c1.p_fabric', 'c1.p_weight', 'c1.p_price', 'c1.p_availablity', 'c1.p_dispatch', 'c1.p_long_desc', 'c1.stiching_cost', 'c1.p_qty', 'c2.cat_name')
                         ->leftjoin('dajwari_categories as c2', 'c1.cat_id', '=', 'c2.id')
-                        ->when($cond, function ($query, $cond) {
+						->leftjoin('dajwari_products_sizes as c3', 'c1.id', '=', 'c3.p_id')
+                        ->leftjoin('dajwari_products_colors as c4', 'c1.id', '=', 'c4.p_id')
+						->when($size, function ($query, $size) {
+                            return $query->whereIn('c3.p_size', $size);
+                        })
+                        ->when($color, function ($query, $color) {
+                            return $query->whereIn('c4.color_name', $color);
+                        })
+                        ->when($fabric, function ($query, $fabric) {
+                            return $query->whereIn('c1.p_fabric', $fabric);
+                        })
+                        ->when($dispatch, function ($query, $dispatch) {
+                            return $query->whereIn('c1.p_dispatch', $dispatch);
+                        })                        
+                        ->when($cat, function ($query, $cat) {
+                            return $query->where('c2.cat_name', 'like', '%' . $cat . '%');
+                        })
+						->groupBy('c1.id', 'c1.cat_id', 'c1.p_name', 'c1.p_code', 'c1.p_short_desc', 'c1.p_fabric', 'c1.p_weight', 'c1.p_price', 'c1.p_availablity', 'c1.p_dispatch', 'c1.p_long_desc', 'c1.stiching_cost', 'c1.p_qty', 'c2.cat_name')->orderBy('c1.id', 'DESC')->get(); //->paginate($limit)
+						
+						/* ->when($cond, function ($query, $cond) {
                             if (count($cond)) {
                                 foreach ($cond as $key => $val) {
                                     return $query->where('c1.' . $key . '', '' . $val . '');
                                 }
                             }
-                        })
-                        ->when($cat, function ($query, $cat) {
-                            return $query->where('c2.cat_name', 'like', '%' . $cat . '%');
-                        })
-                        ->orderBy('c1.id', 'DESC')->paginate($limit);
-        /* if ($select) {
-          $counter = 0;
-          foreach ($select as $row) {
-          $row = (array) $row;
-          $data[$counter]['p_details'] = $row;
-          $data[$counter]['p_color'] = self::getProductColorDetails($row['id']);
-          $data[$counter]['p_size'] = self::getProductSizeDetails($row['id']);
-          $data[$counter]['p_image'] = self::getProductImageDetails($row['id']);
-          $counter++;
-          }
-          }
-          $data['total_records'] = $select->count(); */
-        return $select;
+                        }) */
+						
+        if ($select) {
+            $counter = 0;
+            foreach ($select as $row) {
+                $data[$counter]['p_details'] = $row;
+                $data[$counter]['p_color'] = self::getProductColorDetails($row->id);
+                $data[$counter]['p_size'] = self::getProductSizeDetails($row->id);
+                $data[$counter]['p_image'] = self::getProductImageDetails($row->id);
+
+                //$Colordata[] = self::getProductColorDetails($row->id);
+                //$Sizedata[] = self::getProductSizeDetails($row->id);
+                //$dispatch[] = $row->p_dispatch;
+                $counter++;
+            }
+        }
+		
+		$Filterdata['filter_fabric'] = self::getfilterfabric('', $cat);
+        $Filterdata['filter_color'] = self::getfiltercolor('', $cat);
+        $Filterdata['filter_size'] = self::getfiltersize('', $cat);
+        $Filterdata['filter_dispatch'] = self::getfilterdispatch('', $cat);
+        $Filterdata['total_records'] = $select->count();
+		
+		return array('data' => $data, 'Filterdata' => $Filterdata);
+        //return $select;
     }
 
     public static function getDajwariProductDetails($id = '', $name = false) {

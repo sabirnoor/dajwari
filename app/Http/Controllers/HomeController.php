@@ -27,7 +27,7 @@ class HomeController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request) {//echo img_src_path();
+    public function index(Request $request) {	//echo img_src_path();
         $post = $request->all();
         $getMenuItems = Products::getMenuItems();
         $getTrendingMenu = Products::getTrendingMenu(6);
@@ -63,9 +63,15 @@ class HomeController extends Controller {
         $start = ($request->segment(3)) ? $request->segment(3) : 0;
         $cat = str_replace('_', ' ', $segments);
         $getMenuItems = Products::getMenuItems();
-        $getBrowseProductsList = Products::getBrowseProductsList(array(), 15, $cat);
+		
+		$size = isset($post['size']) ? explode(':',$post['size']) : '';
+        $color = isset($post['color']) ? explode(':',$post['color']) : '';
+        $fabric = isset($post['fabric']) ? explode(':',$post['fabric']) : '';
+        $dispatch = isset($post['dispatch']) ? explode(':',$post['dispatch']) : '';
+		
+        $getBrowseProductsList = Products::getBrowseProductsList(array('size'=>$size,'color'=>$color,'fabric'=>$fabric,'dispatch'=>$dispatch), 15, $cat);
         //echo '<pre>';print_r($getBrowseProductsList);die;
-        return view('products', compact('getMenuItems', 'getBrowseProductsList'));
+        return view('products', compact('getMenuItems', 'getBrowseProductsList','size','color','fabric','dispatch','post'));
     }
     
     
@@ -84,5 +90,66 @@ class HomeController extends Controller {
         //echo '<pre>';print_r(Auth::user());die;	
         return view('home');
     }
+	//kkk --- from model
+	public static function SearchProductsList($cond = null, $limit = null, $keywords = null, $cat = null) {
+        //echo '<pre>';print_r($cond['size']); die();
+        $size = isset($cond['size']) ? $cond['size'] : '';
+        $color = isset($cond['color']) ? $cond['color'] : '';
+        $fabric = isset($cond['fabric']) ? $cond['fabric'] : '';
+        $dispatch = isset($cond['dispatch']) ? $cond['dispatch'] : '';
+        $data = array();
+        $Filterdata = array();
+        $select = DB::table('dajwari_products as c1')
+                        ->select('c1.id', 'c1.cat_id', 'c1.p_name', 'c1.p_code', 'c1.p_short_desc', 'c1.p_fabric', 'c1.p_weight', 'c1.p_price', 'c1.p_availablity', 'c1.p_dispatch', 'c1.p_long_desc', 'c1.stiching_cost', 'c1.p_qty', 'c2.cat_name')
+                        ->leftjoin('dajwari_categories as c2', 'c1.cat_id', '=', 'c2.id')
+                        ->leftjoin('dajwari_products_sizes as c3', 'c1.id', '=', 'c3.p_id')
+                        ->leftjoin('dajwari_products_colors as c4', 'c1.id', '=', 'c4.p_id')
+                        ->when($keywords, function ($query, $keywords) {
+                            return $query->where('c2.cat_name', 'like', '%' . $keywords . '%');
+                        })
+                        ->when($size, function ($query, $size) {
+                            return $query->whereIn('c3.p_size', $size);
+                        })
+                        ->when($color, function ($query, $color) {
+                            return $query->whereIn('c4.color_name', $color);
+                        })
+                        ->when($fabric, function ($query, $fabric) {
+                            return $query->whereIn('c1.p_fabric', $fabric);
+                        })
+                        ->when($dispatch, function ($query, $dispatch) {
+                            return $query->whereIn('c1.p_dispatch', $dispatch);
+                        })
+                        ->when($limit, function ($query, $limit) {
+                            return $query->limit($limit);
+                        })
+                        ->groupBy('c1.id', 'c1.cat_id', 'c1.p_name', 'c1.p_code', 'c1.p_short_desc', 'c1.p_fabric', 'c1.p_weight', 'c1.p_price', 'c1.p_availablity', 'c1.p_dispatch', 'c1.p_long_desc', 'c1.stiching_cost', 'c1.p_qty', 'c2.cat_name')->orderBy('c1.p_price', 'ASC')->get();
+
+        if ($select) {
+            $counter = 0;
+            foreach ($select as $row) {
+                $data[$counter]['p_details'] = $row;
+                $data[$counter]['p_color'] = self::getProductColorDetails($row->id);
+                $data[$counter]['p_size'] = self::getProductSizeDetails($row->id);
+                $data[$counter]['p_image'] = self::getProductImageDetails($row->id);
+
+                //$Colordata[] = self::getProductColorDetails($row->id);
+                //$Sizedata[] = self::getProductSizeDetails($row->id);
+                //$dispatch[] = $row->p_dispatch;
+                $counter++;
+            }
+        }
+
+        $Filterdata['filter_fabric'] = self::getfilterfabric($keywords, $cat);
+        $Filterdata['filter_color'] = self::getfiltercolor($keywords, $cat);
+        $Filterdata['filter_size'] = self::getfiltersize($keywords, $cat);
+        $Filterdata['filter_dispatch'] = self::getfilterdispatch($keywords, $cat);
+        $Filterdata['total_records'] = $select->count();
+
+
+        //$data['filter_dispatch'] = sortArrayval($dispatcharr);
+        //echo '<pre>';print_r($data);die;
+        return array('data' => $data, 'Filterdata' => $Filterdata);
+    }
+	//kkk
 
 }

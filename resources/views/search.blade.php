@@ -192,7 +192,7 @@
                             <div class="product-area">
                                 <?php
                                 if ($SearchProductsList['data']) {
-                                    foreach ($SearchProductsList['data'] as $key => $val) {
+                                    foreach ($SearchProductsList['data'] as $key => $val) { 
                                         $p_image = (array) $val['p_image'];
                                         $p_image1 = (isset($p_image[1]) && !empty($p_image[1]) ? $p_image[1] : '');
                                         $value = $val['p_details'];
