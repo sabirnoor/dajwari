@@ -26,5 +26,6 @@ Route::match(['get', 'post'],'/checkuser', array('uses' => 'AccountController@ch
 Route::match(['get', 'post'],'/saveaddress', array('uses' => 'AccountController@saveaddress'));
 Route::match(['get', 'post'],'/changeUser', array('uses' => 'CartController@changeUser'));
 Route::match(['get', 'post'],'/orderPlace', array('uses' => 'CartController@orderPlace'));
+Route::match(['get', 'post'],'/orderresponse/{id?}', array('uses' => 'CartController@orderresponse'));
 
 Route::resource('cart', 'CartController');

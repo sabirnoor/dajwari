@@ -120,16 +120,20 @@ class CartController extends Controller
     
     public function checkout(Request $request)
     {
-        $getMenuItems = Products::getMenuItems();
-        $Delivery = '';
-        if(Session::get('user')){
-            $Delivery = Account::getAddress(Session::get('user')->id);
+        if(sizeof(Cart::content()) > 0){
+            $getMenuItems = Products::getMenuItems();
+            $Delivery = '';
+            if(Session::get('user')){
+                $Delivery = Account::getAddress(Session::get('user')->id);
+                //echo '<pre>';print_r($Delivery);die;
+            }
+           // if(Session::get('user')){$request->session()->forget('user'); return redirect('cart')->withSuccessMessage('Item has been moved to your Wishlist!');}
+            //$session = $request->session()->get('user');
             //echo '<pre>';print_r($Delivery);die;
+            return view('checkout', compact('getMenuItems','Delivery'));
+        }else{
+           return redirect('/'); 
         }
-       // if(Session::get('user')){$request->session()->forget('user'); return redirect('cart')->withSuccessMessage('Item has been moved to your Wishlist!');}
-        //$session = $request->session()->get('user');
-        //echo '<pre>';print_r($Delivery);die;
-        return view('checkout', compact('getMenuItems','Delivery'));
     }
     
     public function changeUser(Request $request){
@@ -138,7 +142,9 @@ class CartController extends Controller
     
     public function orderPlace(Request $request) {
          $post = $request->all();
+         $order_id_track = 'ORD'.date('dmyhis').'00'.Session::get('user')->id;
          $data = array(
+             'order_id' => $order_id_track,
              'user_id' => Session::get('user')->id,
              'qty' => Cart::instance('default')->count(false),
              'total_price' => str_replace(',','',Cart::instance('default')->subtotal()),
@@ -169,9 +175,14 @@ class CartController extends Controller
                 DB::table('dajwari_order_details')->insert($dataDetails);
             }
          }
-         
-         echo Cart::instance('default')->subtotal();
-         echo '<pre>';print_r($data);die('dd');
+         Cart::destroy();
+         return redirect('orderresponse/'.$order_id_track);
+         //echo Cart::instance('default')->subtotal();
+         //echo '<pre>';print_r($data);die('dd');
+    }
+    
+    public function orderresponse($request){
+        echo '<pre>';print_r($request);die('dd');
     }
     
 }
