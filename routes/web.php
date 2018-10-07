@@ -23,5 +23,8 @@ Route::match(['get', 'post'],'/details/{id?}/{page?}', array('uses' => 'HomeCont
 //Route::match(['get', 'post'],'/cart', array('uses' => 'CartController@index'));
 Route::match(['get', 'post'],'/checkout', array('uses' => 'CartController@checkout'));
 Route::match(['get', 'post'],'/checkuser', array('uses' => 'AccountController@checkuser'));
+Route::match(['get', 'post'],'/saveaddress', array('uses' => 'AccountController@saveaddress'));
+Route::match(['get', 'post'],'/changeUser', array('uses' => 'CartController@changeUser'));
+Route::match(['get', 'post'],'/orderPlace', array('uses' => 'CartController@orderPlace'));
 
 Route::resource('cart', 'CartController');

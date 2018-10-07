@@ -8,6 +8,9 @@ use App\Http\Requests;
 use \Cart as Cart;
 use Validator;
 use App\Products;
+use Session;
+use App\Account;
+use DB;
 
 class CartController extends Controller
 {
@@ -118,7 +121,57 @@ class CartController extends Controller
     public function checkout(Request $request)
     {
         $getMenuItems = Products::getMenuItems();
-        //echo '<pre>';print_r(Cart::content());die;
-        return view('checkout', compact('getMenuItems'));
+        $Delivery = '';
+        if(Session::get('user')){
+            $Delivery = Account::getAddress(Session::get('user')->id);
+            //echo '<pre>';print_r($Delivery);die;
+        }
+       // if(Session::get('user')){$request->session()->forget('user'); return redirect('cart')->withSuccessMessage('Item has been moved to your Wishlist!');}
+        //$session = $request->session()->get('user');
+        //echo '<pre>';print_r($Delivery);die;
+        return view('checkout', compact('getMenuItems','Delivery'));
     }
+    
+    public function changeUser(Request $request){
+        if(Session::get('user')){$request->session()->forget('user'); return redirect('checkout');}
+    }
+    
+    public function orderPlace(Request $request) {
+         $post = $request->all();
+         $data = array(
+             'user_id' => Session::get('user')->id,
+             'qty' => Cart::instance('default')->count(false),
+             'total_price' => str_replace(',','',Cart::instance('default')->subtotal()),
+             'payment_mode' => $request->paymenttype,
+             'order_status' => 'Processing',
+             'use_coupon' => 0,
+             'created' => date('Y-m-d h:i:s'),
+             'modified' => date('Y-m-d h:i:s'),
+         );
+         $order_id = DB::table('dajwari_orders')->insertGetId($data);
+         if(sizeof(Cart::content()) > 0){
+            foreach (Cart::content() as $item){
+                //echo '<pre>';print_r($item);
+                $dataDetails = array(
+                    'order_id' => $order_id,
+                    'p_id' => $item->id,
+                    'p_qty' => $item->qty,
+                    'p_total' => $item->price,
+                    'p_name' => $item->name,
+                    'p_color' => $item->options->color,
+                    'p_kameez_size' => $item->options->size,
+                    'p_bust_size' => $item->options->size,
+                    'p_code' => '1234',
+                    'images' => $item->options->Image,
+                    'created' => date('Y-m-d h:i:s'),
+                    'modified' => date('Y-m-d h:i:s'),
+                );
+                DB::table('dajwari_order_details')->insert($dataDetails);
+            }
+         }
+         
+         echo Cart::instance('default')->subtotal();
+         echo '<pre>';print_r($data);die('dd');
+    }
+    
 }

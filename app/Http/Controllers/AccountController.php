@@ -11,6 +11,7 @@ use App\Products;
 use Validator;
 use Cart;
 use App\Account;
+use Session;
 
 class AccountController extends Controller {
 
@@ -30,43 +31,97 @@ class AccountController extends Controller {
      */
     public function checkuser(Request $request) {
         $post = $request->all();
+
+        //echo '<pre>';print_r($post); die;
+        $user = $post['user'];
+        $password = $post['password'];
+        $getUserList = Account::checkuser($user);
+        if($request->password){
+            if($getUserList->userexists == 1){
+                $loginby = $getUserList->user_loginby;
+                $getUser = Account::userlogin($user, $password, $loginby);
+                //echo '<pre>';print_r($getUser);die('dd');
+                if($getUser){
+                    Session::put('user', $getUser);
+                    Session::save();
+                    $Delivery = Account::getAddress($getUser->id);
+                    return response()->json(['status' => true, 'error'=>false, 'userexists' => $getUserList->userexists,'message'=>'Invalid username or password','Delivery'=>$Delivery]); 
+                    
+                }else{
+                   return response()->json(['status' => false, 'error'=>true, 'userexists' => $getUserList->userexists,'message'=>'Invalid username or password']); 
+                }
+               
+            }
+            
+        }else{
+            return response()->json(['status' => false, 'error'=>false, 'userexists' => $getUserList->userexists,'message'=>'']);
+        }
         
-        //echo '<pre>';print_r($post);die;
-		$user = $post['user'];
-		$password = $post['password'];
-		$getUserList = Account::checkuser($user);
-		//echo '<pre>';print_r($getUserList);die;
-		if($getUserList->userexists==1){
-			$loginby = $getUserList->user_loginby;
-			$getUser = Account::userlogin($user,$password,$loginby);
-		}
-		else{
-			//$getUserList = Account::userregister();
-		}
-		$getUser['success'] = 1;
-		return json_encode($getUser);
+        if($getUserList->userexists == 0) {
+            return response()->json(['status' => false, 'userexists' => $getUserList->userexists]);
+        }
+        
+        if($getUserList->userexists == 1) {
+            $loginby = $getUserList->user_loginby;
+            $getUser = Account::userlogin($user, $password, $loginby);
+        } else {
+            //$getUserList = Account::userregister();
+        }
+        $getUser['success'] = 1;
+        return json_encode($getUser);
         //return view('index', compact('getMenuItems', 'getHomeBanners', 'p_customer_fav', 'p_trending', 'getTrendingMenu','getHomeAdvts','getTestimonials','getBlogs'));
     }
-	
-	
-	
-	 public function deliverAddress(Request $request) {
+    
+    public function saveaddress(Request $request) {
         $post = $request->all();
         $data = array(
-		               'address' => $post['address'],
-					   'city' => $post['city'],
-					   'state' => $post['state'],
-					   'zipcode' => $post['zipcode']
-					  );
-	    echo $insertDelivery = Account::delivery($data);
-		
+            'user_id' => Session::get('user')->id,
+            'name' => $post['name'],
+            'mobile' => $post['mobile'],
+            'locality' => $post['Locality'],
+            'landmark' => $post['Landmark'],
+            'AlternatePhone' => $post['Alternateno'],
+            'addresstype' => $post['addresstype'],
+            'address' => $post['Address'],
+            'city' => $post['cityTown'],
+            'state' => $post['state'],
+            'zipcode' => $post['pincode']
+        );
+        if($request->address_id){
+            $data['modified'] = date('Y-m-d h:i:s');
+            $UpdateDelivery = Account::deliveryUpdate($request->address_id,$data);
+            if($UpdateDelivery){
+                return response()->json(['status' => true, 'error'=>false, 'userexists' => '','message'=>'Address Update successfully']);
+            }else{
+                return response()->json(['status' => false, 'error'=>true, 'userexists' => '','message'=>'Unable to update address']);
+            }
+        }else{
+            $data['created'] = date('Y-m-d h:i:s');
+            $data['modified'] = date('Y-m-d h:i:s');
+            $insertDelivery = Account::delivery($data);
+            if($insertDelivery){
+                return response()->json(['status' => true, 'error'=>false, 'userexists' => '','message'=>'Address save successfully']);
+            }else{
+                return response()->json(['status' => false, 'error'=>true, 'userexists' => '','message'=>'Unable to save address']);
+            }
+//            echo '<pre>';print_r($insertDelivery);
+//            echo '<pre>';print_r($data);die('dd');
+        }
     }
 
+    public function deliverAddress(Request $request) {
+        $post = $request->all();
+        $data = array(
+            'address' => $post['address'],
+            'city' => $post['city'],
+            'state' => $post['state'],
+            'zipcode' => $post['zipcode']
+        );
+        echo $insertDelivery = Account::delivery($data);
+    }
     
-
     
     
-    
-    
+     
 
 }

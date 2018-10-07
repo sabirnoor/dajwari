@@ -368,9 +368,18 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    var SessionData = $('.SessionData').val();
+    if(SessionData){
+        $("#loginsignup").addClass("collapse");
+        $("#loginsignup").hide();
+        $("#DeliveryAddress").addClass("collapse in"); 
+        $("#DeliveryAddress").show(); 
+    }
+    //console.log(SessionData);
+    $('.setpass').hide();
     $('.checkaccount').click(function (){
         var user = $('.user').val();
-		var pass = $('.pass').val(); 
+        var pass = $('.pass').val(); 
         var action = $('.checkuser').val(); //alert(user); alert(pass);
         $.ajax({
             url:action,
@@ -378,10 +387,37 @@
             data:{user:user,password:pass},
             dataType:'json',
             success:function(result){ //alert(result);
-                if(result.success){
+                console.log(result.Delivery);
+                if(result.status){
+                    var DeliveryData = result.Delivery;
+                    $("#loginsignup").addClass("collapse");
+                    $("#loginsignup").hide();
+                    $("#DeliveryAddress").show();
+                    $("#DeliveryAddress").addClass("collapse in");
+                    $('#name').val(DeliveryData.name);
+                    $('#mobile').val(DeliveryData.mobile);
+                    $('#pincode').val(DeliveryData.zipcode);
+                    $('#Locality').val(DeliveryData.locality);
+                    $('#Address').val(DeliveryData.address);
+                    $('#cityTown').val(DeliveryData.city);
+                    $('#state').val(DeliveryData.state);
+                    $('#Landmark').val(DeliveryData.landmark);
+                    $('#Alternateno').val(DeliveryData.AlternatePhone);
+                    $('#address_id').val(DeliveryData.id);
+                    if(DeliveryData.addresstype == 'Home'){
+                        $('input[value="Home"]').prop("checked", true);
+                    }else{
+                        $('input[value="Work"]').prop("checked", true);
+                    }
                     alert("Login Successfully");
                 }else{
-                    alert(result.message);return false;
+                    $('.pass').removeAttr("disabled");
+                    $('.setpass').show();
+                    
+                    if(result.error){
+                       alert(result.message); 
+                    }
+                    return false;
                 }
             },
             error:function(result){
@@ -390,24 +426,27 @@
 	});
         return false;
     });
-	
-	
-	 $('.deliverAddress').click(function (){ alert(1);
-        var address = $('#address').val();
-		var city = $('#city').val(); 
-		var state = $('#state').val();
-		var zipcode = $('#zipcode').val(); 
-        var action = "{{url('deliverAddress')}}"; //alert(user); alert(pass);
+    
+    $('#shipingaddress').on('submit',function (e) {
+        e.preventDefault();
+        var data = $(this).serialize();
+        var action = $('.saveaddress').val(); //alert(user); alert(pass);
         $.ajax({
             url:action,
             type:'POST',
-            data:{address:address,city:city,state:state,zipcode:zipcode},
+            data:data,
             dataType:'json',
-            success:function(result){
-                if(result.success){
-                    alert("Login Successfully");
+            success:function(result){ //alert(result);
+                console.log(result);
+                if(result.status){
+                    $("#DeliveryAddress").addClass("collapse");
+                    $("#DeliveryAddress").hide();
+                    $("#OrderSummary").addClass("collapse in");
+                    $("#OrderSummary").show();
+                    $(".CHANGEDELIVERY").show();
                 }else{
-                    alert(result.message);return false;
+                    alert(result.message);
+                    return false;
                 }
             },
             error:function(result){
@@ -415,6 +454,40 @@
             }
 	});
         return false;
+    });
+    
+    $('.ContinueOrder').click(function (){
+        $("#OrderSummary").addClass("collapse");
+        $("#OrderSummary").hide();
+        $("#PaymentOption").addClass("collapse in");
+        $("#PaymentOption").show();
+        $(".CHANGEORDER").show();
+    });
+	
+	
+        $('.deliverAddress').click(function (){ alert(1);
+            var address = $('#address').val();
+            var city = $('#city').val(); 
+            var state = $('#state').val();
+            var zipcode = $('#zipcode').val(); 
+            var action = "{{url('deliverAddress')}}"; //alert(user); alert(pass);
+            $.ajax({
+                url:action,
+                type:'POST',
+                data:{address:address,city:city,state:state,zipcode:zipcode},
+                dataType:'json',
+                success:function(result){
+                    if(result.success){
+                        alert("Login Successfully");
+                    }else{
+                        alert(result.message);return false;
+                    }
+                },
+                error:function(result){
+                    alert('Opps something wrong!!');return false;
+                }
+            });
+            return false;
     });
     
         
