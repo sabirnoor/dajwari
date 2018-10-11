@@ -15,29 +15,20 @@ class Account extends Model {
     protected $fillable = ['id', 'timestamp'];
 
     public static function checkuser($user) {
-
-        $data = DB::table('dajwari_users as c1')
-                        ->where('c1.user_email', $user)
-                        ->orderBy('c1.id', 'DESC')->first();
-
-        $loginby = 'user_email';
-
-        if (empty($data)) {
-            $data = DB::table('dajwari_users as c1')
-                            ->where('c1.mobile', $user)
-                            ->orderBy('c1.id', 'DESC')->first();
-            $loginby = 'mobile';
+        if(preg_match('/^\d{10}$/',$user)){
+            $fields = 'mobile';
+        }else{
+            $fields = 'user_email';
         }
-
-        if (empty($data)) {
+        $data = DB::table('dajwari_users as c1')->where('c1.' . $fields . '', $user)->orderBy('c1.id', 'DESC')->first();
+        $loginby = $fields;
+        if ($data) {
+            $data->userexists = 1;
+        } else {
             $data = (Object) $data;
             $data->userexists = 0;
-        } else {
-            $data->userexists = 1;
         }
         $data->user_loginby = $loginby;
-        //var_dump($data); exit;
-
         return $data;
     }
 
@@ -45,7 +36,7 @@ class Account extends Model {
         //\DB::enableQueryLog();
         $data = DB::table('dajwari_users as c1')
                 ->where('c1.' . $fields . '', $user)
-                ->where('c1.password', base64_encode($password))
+                ->where('c1.password', md5($password))
                 ->first();
         //$query = \DB::getQueryLog();
         //var_dump($data); exit;

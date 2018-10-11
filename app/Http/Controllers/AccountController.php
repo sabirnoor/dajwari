@@ -32,25 +32,52 @@ class AccountController extends Controller {
     public function checkuser(Request $request) {
         $post = $request->all();
 
-        //echo '<pre>';print_r($post); die;
         $user = $post['user'];
         $password = $post['password'];
         $getUserList = Account::checkuser($user);
+        //echo '<pre>';print_r($getUserList); die;
         if($request->password){
             if($getUserList->userexists == 1){
                 $loginby = $getUserList->user_loginby;
                 $getUser = Account::userlogin($user, $password, $loginby);
-                //echo '<pre>';print_r($getUser);die('dd');
                 if($getUser){
                     Session::put('user', $getUser);
                     Session::save();
                     $Delivery = Account::getAddress($getUser->id);
-                    return response()->json(['status' => true, 'error'=>false, 'userexists' => $getUserList->userexists,'message'=>'Invalid username or password','Delivery'=>$Delivery]); 
+                    return response()->json(['status' => true, 'error'=>false, 'userexists' => $getUserList->userexists,'message'=>'Login successfully','Delivery'=>$Delivery]); 
                     
                 }else{
                    return response()->json(['status' => false, 'error'=>true, 'userexists' => $getUserList->userexists,'message'=>'Invalid username or password']); 
                 }
                
+            }else{
+                $fields = $getUserList->user_loginby;
+                $data = array(
+                    ''.$fields.'' => $post['user'],
+                    'password' => md5($post['password']),
+                    'is_active' => 1,
+                    'created' => date('Y-m-d H:i:s'),
+                    'modified' => date('Y-m-d H:i:s')
+                );
+                
+                $insertid = DB::table('dajwari_users')->insertGetId($data);
+                $dataDetails = array(
+                    'user_id' => $insertid,
+                    'user_id' => '',
+                    'created' => date('Y-m-d H:i:s'),
+                    'modified' => date('Y-m-d H:i:s')
+                );
+                DB::table('dajwari_user_details')->insertGetId($dataDetails);
+                $getUser = Account::userlogin($user, $password, $fields);
+                //echo '<pre>';print_r($getUser);die;
+                if($getUser){
+                    Session::put('user', $getUser);
+                    Session::save();
+                    $Delivery = Account::getAddress($getUser->id);
+                    return response()->json(['status' => true, 'error'=>false, 'userexists' => $getUserList->userexists,'message'=>'Login successfully','Delivery'=>$Delivery]); 
+                }else{
+                    return response()->json(['status' => false, 'error'=>true, 'userexists' => $getUserList->userexists,'message'=>'Oops something wrong']); 
+                }
             }
             
         }else{
