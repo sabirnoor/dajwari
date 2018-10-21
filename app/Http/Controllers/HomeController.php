@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use DB;
 use App\DajwariCategories;
 use App\Products;
+use App\Pages;
 use Validator;
 use Cart;
 
@@ -41,7 +42,7 @@ class HomeController extends Controller {
         return view('index', compact('getMenuItems', 'getHomeBanners', 'p_customer_fav', 'p_trending', 'getTrendingMenu','getHomeAdvts','getTestimonials','getBlogs'));
     }
 
-    public function search(Request $request) {
+    public function search(Request $request) { //echo 1;exit;
         $post = $request->all();
         $keywords = isset($post['q']) ? $post['q'] : '';
         $size = isset($post['size']) ? explode(':',$post['size']) : '';
@@ -86,7 +87,7 @@ class HomeController extends Controller {
         return view('details', compact('getMenuItems','ProductDetails'));
     }
 
-    public function dashboard() {
+    public function dashboard() { //echo 1;exit;
         //echo '<pre>';print_r(Auth::user());die;	
         return view('home');
     }
@@ -150,6 +151,69 @@ class HomeController extends Controller {
         //echo '<pre>';print_r($data);die;
         return array('data' => $data, 'Filterdata' => $Filterdata);
     }
-	//kkk
+	
+	public function about(Request $request) { //echo 1; exit;
+		 $post = $request->all();
+		 $pid = 1;
+		 $getMenuItems = Products::getMenuItems();
+		 $pageDetails = Pages::getPageContent($pid);
+        //echo '<pre>';print_r($pageDetails);die;	
+        return view('about-us',compact('getMenuItems','pageDetails'));
+    }
+	
+	public function contact(Request $request) { //echo 1; exit;
+		 $post = $request->all();
+		 $pid = 2;
+		 $getMenuItems = Products::getMenuItems();
+		 $pageDetails = Pages::getPageContent($pid);
+        //echo '<pre>';print_r($pageDetails);die;	
+        return view('contact-us',compact('getMenuItems','pageDetails'));
+    }
+	
+	public function privacy_policy(Request $request) { //echo 1; exit;
+		 $post = $request->all();
+		 $pid = 4;
+		 $getMenuItems = Products::getMenuItems();
+		 $pageDetails = Pages::getPageContent($pid);
+        //echo '<pre>';print_r($pageDetails);die;	
+        return view('privacy-policy',compact('getMenuItems','pageDetails'));
+    }
+	
+	public function return_exchange(Request $request) { //echo 1; exit;
+		 $post = $request->all();
+		 $pid = 5;
+		 $getMenuItems = Products::getMenuItems();
+		 $pageDetails = Pages::getPageContent($pid);
+        //echo '<pre>';print_r($pageDetails);die;	
+        return view('return-exchange',compact('getMenuItems','pageDetails'));
+    }
+	
+	public function payment_policy(Request $request) { //echo 1; exit;
+		 $post = $request->all();
+		 $pid = 6;
+		 $getMenuItems = Products::getMenuItems();
+		 $pageDetails = Pages::getPageContent($pid);
+        //echo '<pre>';print_r($pageDetails);die;	
+        return view('payment-policy',compact('getMenuItems','pageDetails'));
+    }
+	
+	public function website_usage(Request $request) { //echo 1; exit;
+		 $post = $request->all();
+		 $pid = 7;
+		 $getMenuItems = Products::getMenuItems();
+		 $pageDetails = Pages::getPageContent($pid);
+        //echo '<pre>';print_r($pageDetails);die;	
+        return view('website-usage',compact('getMenuItems','pageDetails'));
+    }
+	
+	public function term_condition(Request $request) { //echo 1; exit;
+		 $post = $request->all();
+		 $pid = 8;
+		 $getMenuItems = Products::getMenuItems();
+		 $pageDetails = Pages::getPageContent($pid);
+        //echo '<pre>';print_r($pageDetails);die;	
+        return view('term-condition',compact('getMenuItems','pageDetails'));
+    }
+	
 
 }

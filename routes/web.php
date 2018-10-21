@@ -27,5 +27,13 @@ Route::match(['get', 'post'],'/saveaddress', array('uses' => 'AccountController@
 Route::match(['get', 'post'],'/changeUser', array('uses' => 'CartController@changeUser'));
 Route::match(['get', 'post'],'/orderPlace', array('uses' => 'CartController@orderPlace'));
 Route::match(['get', 'post'],'/orderresponse/{id?}', array('uses' => 'CartController@orderresponse'));
+Route::match(['get', 'post'],'/about', array('uses' => 'HomeController@about'));
+Route::match(['get', 'post'],'/contact', array('uses' => 'HomeController@contact'));
+Route::match(['get', 'post'],'/privacy_policy', array('uses' => 'HomeController@privacy_policy'));
+Route::match(['get', 'post'],'/return_exchange', array('uses' => 'HomeController@return_exchange'));
+Route::match(['get', 'post'],'/payment_policy', array('uses' => 'HomeController@payment_policy'));
+Route::match(['get', 'post'],'/website_usage', array('uses' => 'HomeController@website_usage'));
+Route::match(['get', 'post'],'/term_condition', array('uses' => 'HomeController@term_condition'));
+
 
 Route::resource('cart', 'CartController');
