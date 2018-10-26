@@ -140,8 +140,8 @@
                                     <li><a class="main-a" href="#">Aceeessories</a></li>
                                     <li><a class="main-a" href="#">Deals</a></li>-->
                                     <li><a class="main-a" href="#">Blogs</a></li>										
-                                    <li><a class="main-a" href="#">Contact</a></li>
-                                    <li><a class="main-a" href="#">About Us</a></li>
+                                    <li><a class="main-a" href="<?= url('contact/') ?>">Contact</a></li>
+                                    <li><a class="main-a" href="<?= url('about/') ?>">About Us</a></li>
                                 </ul>
                             </nav>
                         </div>

@@ -67,11 +67,11 @@
                         <div class="division">
                             <h4 class="title-footer">Policies</h4>
                             <ul class="Column-one">
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Returns & Exchanges Policy</a></li>
-                                <li><a href="#">Payment Policy disclaimers</a></li>
-                                <li><a href="#">Website Usage Statement</a></li>
-                                <li><a href="#">Terms  & Conditions</a></li>   
+                                <li><a href="<?= url('privacy_policy/') ?>">Privacy Policy</a></li>
+                                <li><a href="<?= url('return_exchange/') ?>">Returns & Exchanges Policy</a></li>
+                                <li><a href="<?= url('payment_policy/') ?>">Payment Policy disclaimers</a></li>
+                                <li><a href="<?= url('website_usage/') ?>">Website Usage Statement</a></li>
+                                <li><a href="<?= url('term_condition/') ?>">Terms  & Conditions</a></li>   
                             </ul>
                         </div>
                     </div>
