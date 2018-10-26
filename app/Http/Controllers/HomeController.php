@@ -81,9 +81,9 @@ class HomeController extends Controller {
         if(!$ProductDetails) {
             return redirect(url('/'));
         }
-        $cart = Cart::content();
-        //echo '<pre>';print_r($cart);die;
-        return view('details', compact('getMenuItems','ProductDetails'));
+        //$cart = Cart::content();
+        //echo '<pre>';print_r($ProductDetails);die;
+        return view('details2', compact('getMenuItems','ProductDetails'));
     }
 
     public function dashboard() {

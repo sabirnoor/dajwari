@@ -234,7 +234,7 @@ class Products extends Model {
             }
         }
         if($id <> '' && (integer)$id > 0) {
-            $row = DB::table('dajwari_products')->where('id', $id)->first();
+            $row = DB::table('dajwari_products')->select('dajwari_products.*', 'c2.fabric_name')->leftjoin('dajwari_fabric as c2', 'dajwari_products.p_fabric', '=', 'c2.id')->where('dajwari_products.id', $id)->first();
             $data['p_details'] = $row;
             $data['p_color'] = self::getProductColorDetails($row->id);
             $data['p_size'] = self::getProductSizeDetails($row->id);

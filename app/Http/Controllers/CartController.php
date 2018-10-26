@@ -42,9 +42,12 @@ class CartController extends Controller
             'qty'   => 1,
             'price'      => $request->price,
             'options' => [
-                'color' => 'Red',
+                'Kameezsize' => $request->Kameezsize,
+                'Height' => $request->Height,
+                'color' => $request->color,
                 'size' => $request->p_size,
                 'Image' => $request->image,
+                'stitching_sizes' => $request->stitching_sizes,
 
             ],
         ]);

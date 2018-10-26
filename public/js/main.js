@@ -490,5 +490,19 @@
             return false;
     });
     
+    $(document).on('click', 'input[name="stitching_sizes"]', function(e) {
+        //e.preventDefault();
+        if($(this).is(':checked')) {
+            if($(this).val() == 2) {
+                $(this).parents('div').find('div.dajwari_product_Kameezsizes').fadeIn('slow');
+                $(this).parents('div').find('div.dajwari_your_Height').fadeIn('slow');
+            } else {
+                $(this).parents('div').find('div.dajwari_product_Kameezsizes').fadeOut('slow');
+                $(this).parents('div').find('div.dajwari_your_Height').fadeOut('slow');
+                //alertify.log('You will not be charged any extra cost for this Product.');
+            }
+        }
+    });
+    
         
 })(jQuery); 

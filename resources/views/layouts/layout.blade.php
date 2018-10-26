@@ -19,6 +19,7 @@ $action = Request::segment(1);
         <link rel="stylesheet" href="{{asset('public/css/bootstrap.min.css') }}">
         <!-- nivo-slider css -->
         <link rel="stylesheet" href="{{asset('public/css/default.css') }}">
+        <link rel="stylesheet" href="{{asset('public/css/ubislider.min.css') }}">
         <link rel="stylesheet" href="{{asset('public/css/nivo-slider.css') }}">
         <!-- Important Owl stylesheet -->
         <link rel="stylesheet" href="{{asset('public/css/owl.carousel.css') }}">
@@ -55,13 +56,11 @@ $action = Request::segment(1);
         
         
         <!-- bootstrap js -->
+        <script src="{{asset('public/js/jquery.min.js') }}"></script>
         <script src="{{asset('public/js/bootstrap.min.js') }}"></script>
         <!-- nivo slider -->
         <script src="{{asset('public/js/jquery.nivo.slider.pack.js') }}"></script>
-        <?php if($action == 'details'){ ?>
-        <script src="{{asset('public/scripts/zoom-image.js') }}"></script>
-        <script src="{{asset('public/scripts/main.js') }}"></script>
-        <?php } ?>
+        
         <!-- owl carousel js --> 
         <script src="{{asset('public/js/owl.carousel.min.js') }}"></script>
         <!-- mixitup js -->
@@ -92,6 +91,11 @@ $action = Request::segment(1);
         <script type="text/javascript" src="{{asset('public/lazy-master/jquery.lazy.plugins.min.js') }}"></script>
         <!-- main js -->
         <script src="{{asset('public/js/main.js') }}"></script>
+        <?php if($action == 'details'){ ?>
+        <script src="{{asset('public/js/ubislider.min.js') }}"></script>
+        <script src="{{asset('public/js/scripts.js') }}"></script>
+        <script src="{{asset('public/js/jqueryElevateZoom.js') }}"></script>
+        <?php } ?>
         <script type="text/javascript">
         $.ajaxSetup({
             headers: {
@@ -103,9 +107,45 @@ $action = Request::segment(1);
         <script type="text/javascript">
             $('.add-tocart').on('click', function () {
                 var size = $('#size').val();
+                var Kameezsize = $('#Kameezsize').val();
+                var Height = $('#Height').val();
+                var color = $('#color').val();
+                var stitching_sizes = $("input[name='stitching_sizes']:checked").val();
+                if(stitching_sizes == 2 && Kameezsize == ''){
+                    alert('Please select kameez size');
+                    $('#Kameezsize').focus();return false;
+                }
+                if(stitching_sizes == 2 && Height == ''){
+                    alert('Please select your height');
+                    $('#Height').focus();return false;
+                }
+                if(color == ''){
+                    alert('Please select product color');
+                    $('#color').focus();return false;
+                }
+                if(size == ''){
+                    alert('Please select product size');
+                    $('#size').focus();return false;
+                }
                 $('#p_size').val(size);
+                $('#p_Kameezsize').val(Kameezsize);
+                $('#p_Height').val(Height);
+                $('#p_color').val(color);
+                $('#p_stitching_sizes').val(stitching_sizes);
                 $('.AddToCart').submit();
             });
+        </script>
+        <script type="text/javascript">
+            $('#slider4').ubislider({
+                arrowsToggle: true,
+                type: 'ecommerce',
+                hideArrows: true,
+                autoSlideOnLastClick: true,
+                modalOnClick: true,
+                onTopImageChange: function(){
+                        $('#imageSlider4 img').elevateZoom();
+                }
+            }); 
         </script>
         <?php } ?>
         <?php if($action == 'cart'){ ?>

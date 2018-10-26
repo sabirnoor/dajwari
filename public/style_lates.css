@@ -1,8 +1,8 @@
 /*----------------------------------------*/
 /*  1.  universel after before and some of hover effect  css for any area 
 /*----------------------------------------*/
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i|Oswald:300,400,700');
-html, body {height: 100%;}
+/*@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i|Oswald:300,400,700');
+*/html, body {height: 100%; font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;}
 .floatleft {float:left}
 .floatright {float:right}
 .alignleft {float:left;margin-right:15px;margin-bottom: 15px}
@@ -14,8 +14,7 @@ img {width:100%;height:auto;transition: all 1s cubic-bezier(0.19, 1, 0.22, 1) 0s
 p {margin:0 0 15px;}
 h1, h2, h3, h4, h5, h6 {
   margin: 0 0 10px;
-  font-family: Oswald; 
-}
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;}
 a {transition: all 0.3s ease 0s;text-decoration:none;display: inline-block;}
 a:hover {
   color: #444;
@@ -207,13 +206,12 @@ header{
 .main-menu ul.main li{
     display: inline-block;
     position: relative;
-    padding: 0px 1.5%;
+    padding: 0px 1.3%;
 }
 .header-cart a.icon-heaher,.header-language a.icon-heaher,.header-userinfo a.icon-heaher,.main-menu ul.main li a.main-a{
     padding: 10px 0;
-    font-family: Oswald;
-    font-weight: 300;
-    font-size: 14px;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight: 300;
+    font-size: 13px;
     color: #fff;
     text-transform: uppercase;
     position: relative;
@@ -338,7 +336,7 @@ header{
     position: relative;
     font-family: "Open Sans";
     font-size: 13px;
-    display: inline-block;
+    display:block;
 
     text-transform: capitalize;
 }
@@ -456,7 +454,7 @@ a.title-dropsown:hover{padding-left: 0px;}
     color: #000;
     width: 20px;
     height: 20px;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 20px;
     text-align: center !important;
     border-radius: 100%;
@@ -541,8 +539,7 @@ p.total{
 }
 h2.first,h1.decond,p.save{
     color: rgb(255, 255, 255);
-    font-family: Oswald;
-    font-weight: 300;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight: 300;
 }
 h2.first{
     font-size: 35px;
@@ -596,7 +593,7 @@ search area
     /*padding: 11px 50px;*/
 
 }
-.select-optn,.input-text-box{padding: 13px 35px;font-size: 14px;height: 50px;}
+.select-optn,.input-text-box{padding: 13px 35px;font-size: 13px;height: 50px;}
 .select-style{
     background: #000;
     width: 18%;
@@ -608,7 +605,7 @@ search area
 .select-style:after,.select-style:before{
     position: absolute;
     font-family: "FontAwesome";
-    font-size: 14px;
+    font-size: 13px;
     width: 20px;
     height: 15px;  
     top: 0px;
@@ -681,8 +678,7 @@ p.pragrap{
     border: 1px solid rgba(240, 235, 235, 0.29);
     border-radius: 20px;
     font-weight: 300;
-    font-family: Oswald;
-    text-transform: uppercase;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform: uppercase;
     background: transparent;
     font-size: 12px;
 }
@@ -1280,7 +1276,7 @@ model// quick view area
 }
 .post-content h3 a{
     color: #3e3e3e;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 400;
     line-height: 1.8;
     text-transform: uppercase;
@@ -1500,7 +1496,7 @@ feature area
 }
 .tstmnil-content p{
     font-family: "Open Sans";
-    font-size: 14px;
+    font-size: 13px;
     font-style: italic;
     line-height: 1.8;
 }
@@ -1747,8 +1743,7 @@ feature area
     line-height: 39px;
     font-weight: 400;
     color: rgb(54, 54, 54);
-    font-family: Oswald;
-    letter-spacing: 6px;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing: 6px;
     transform: scale(1.3);
 }
 .slider-p3 p.save {
@@ -2313,8 +2308,7 @@ menu
     position: absolute;
     color: #fff;
     font-size: 30px;
-    font-family: Oswald;
-    font-weight: 300;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight: 300;
     line-height: 30px;
     transition: 0.3s;
     opacity: 0;
@@ -2630,9 +2624,9 @@ menu
     text-align: center;
     background: #fff;
     margin: 5px;
-    border-radius: 17px;
+    border-radius: 50%;
     color: #8a8a8a;
-padding: 0px 30px;
+    width: 35px;
     height: 35px;
     line-height: 34px;
     float: left;
@@ -2660,8 +2654,7 @@ padding: 0px 15px;
     text-align: center;
 }
 .shop-banner h2 {
-    font-family: Oswald;
-    font-size: 40px;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size: 40px;
     text-transform: uppercase;
 }
 .shop-banner span{padding: 5px;}
@@ -2862,8 +2855,7 @@ padding: 0px 15px;
     margin: 13px 0;
     padding: 5px 17px;
     border-radius: 20px;
-    font-family: Oswald;
-    text-transform: uppercase;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;text-transform: uppercase;
     background: transparent;
     font-size: 12px;
 }
@@ -2954,7 +2946,7 @@ ul.sidebar-menu li {
     letter-spacing: 1px;
     text-transform: uppercase;
     transition: all 400ms ease-out 0s;
-    width: 85px;
+    width: 71px;
 }
 .price_slider_amount > input[type="submit"]:hover{
     background: #c9141e !important;
@@ -3147,8 +3139,8 @@ ul.sidebar-menu li {
     margin-bottom: 8px;
     font-weight: normal;
     font-size: 15px;
-    color: #0194D1;
-	font-family:"Open Sans";
+    color: #4d4d4d;
+    text-transform: uppercase;
 }
 .single-pro-details .product-details-shop {
     padding: 0;
@@ -3258,7 +3250,7 @@ ul.sidebar-menu li {
 }
 .product-info table th{
     width: 30% ;
-    font-size: 14px;
+    font-size: 13px;
     background: #f5f5f5;
 }
 .product-info table th,.product-info table td{
@@ -3289,7 +3281,7 @@ ul.sidebar-menu li {
     margin: 20px 0;
 }
 .reviews h4 {
-    font-size: 14px;
+    font-size: 13px;
 }
 .reviews span a {
     padding-right: 1em;
@@ -3533,7 +3525,7 @@ portfolio
     color: #343434;
 }
 .entry-meta{
-    font-size: 14px;
+    font-size: 13px;
     font-family: "Oswald";
     text-transform: uppercase;
 }
@@ -3645,7 +3637,7 @@ portfolio
     padding: 20px 0;
 }
 .member h4{
-    font-size: 14px;
+    font-size: 13px;
 color: #383838;
 text-transform: uppercase;
 margin: 0px 0px 12px;
@@ -3671,7 +3663,7 @@ margin: 0px 0px 12px;
 about page 
 -------------------------*/
 .content p {
-    font-size: 14px;
+    font-size: 13px;
     color: #747474;
 }
 /**---------------------------
@@ -3817,9 +3809,10 @@ p.checkout-coupon input[type="submit"] {
     color: red;
 }
 .country-select {
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     position: relative;
 }
+
 .country-select::before {
     content: "";
     font-family: fontawesome;
@@ -3895,7 +3888,7 @@ p.checkout-coupon input[type="submit"] {
 .your-order-table table th, .your-order-table table td {
     border-bottom: 1px solid #d8d8d8;
     border-right: medium none;
-    font-size: 14px;
+    font-size: 13px;
     padding: 15px 0;
     text-align: center;
     font-family: Open Sans;
@@ -3919,7 +3912,7 @@ p.checkout-coupon input[type="submit"] {
 .your-order-table table th, .your-order-table table td {
     border-bottom: 1px solid #d8d8d8;
     border-right: medium none;
-    font-size: 14px;
+    font-size: 13px;
     padding: 15px 0;
     text-align: left;
     font-weight: bold;
@@ -3938,7 +3931,7 @@ p.checkout-coupon input[type="submit"] {
 }
 .payment-accordion h3 a {
     color: #6f6f6f;
-    font-size: 14px;
+    font-size: 13px;
     padding-left: 25px;
     position: relative;
     text-transform: capitalize;
@@ -4040,7 +4033,7 @@ h1.entry-title {
     font-size: 13px;
 }
 .table-content table td.product-name a {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     margin-left: 10px;
     color: #6f6f6f;
@@ -4052,7 +4045,7 @@ h1.entry-title {
     width: 180px;
 }
 .table-content table td.product-subtotal {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: bold;
     width: 120px;
 }
@@ -4117,7 +4110,7 @@ h1.entry-title {
 }
 .coupon h3 {
     margin: 0 0 10px;
-    font-size: 14px;
+    font-size: 13px;
     text-transform: uppercase;
 }
 .coupon input[type="text"] {
@@ -4153,7 +4146,7 @@ h1.entry-title {
 }
 .cart_totals table th {
     border: medium none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: bold;
     padding: 0 20px 12px 0;
     text-align: right;
@@ -4195,7 +4188,7 @@ h1.entry-title {
 }
 .cart_totals table th {
     border: medium none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: bold;
     padding: 0 20px 12px 0;
     text-align: right;
@@ -4230,7 +4223,7 @@ a.shipping-calculator-button:hover {
     background: #cdcdcd  none repeat scroll 0 0;
     color: #fff;
     display: inline-block;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     height: 50px;
     line-height: 50px;
@@ -4255,9 +4248,46 @@ a.shipping-calculator-button:hover {
 
 .checkbox1-custom { opacity: 0; position: absolute; }
 .checkbox1-custom, .checkbox1-custom-label { display: inline-block; vertical-align: middle; margin: 5px; cursor: pointer; }
-.checkbox1-custom-label { position: relative; font-size: 14px; color: #bebebe; font-weight: 400; }
+.checkbox1-custom-label { position: relative; font-size: 13px; color: #bebebe; font-weight: 400; }
 .checkbox1-custom-label img{margin-right: 2px;}
 .checkbox1-custom-label span{color: #959595; padding-left: 10px;}
 .checkbox1-custom + .checkbox1-custom-label:before { content: ''; background: url(img/ch1.png); display: inline-block; vertical-align: middle; width: 16px; height: 18px; margin-right: 10px;}
 .checkbox1-custom:checked + .checkbox1-custom-label:before { background: url(img/ch2.png); }
 .checkbox1-custom:focus + .checkbox1-custom-label { outline: none; }
+
+#filters_col {
+	background-color:#fff;
+	padding:10px 15px 15px 15px;
+	border:1px solid #ededed
+}
+#filters_col label {
+}
+a#filters_col_bt {
+	display:block;
+	color:#333;
+	font-size:24px;
+	position:relative;
+	border-bottom:1px solid #CCC;
+	padding-bottom:5px;
+	margin-bottom:15px;
+}
+a#filters_col_bt:before {
+	font-family:ElegantIcons;
+	content:"";
+	font-size:26px;
+	font-size:1.625rem;
+	position:absolute;
+	right:0;
+	top:0;
+	width:21px;
+	height:23px;
+	background:url(img/filter.jpg) no-repeat left 5px;
+	line-height:1;
+	font-weight:400
+}
+.filter_type h6 {
+	border-top:1px solid #ededed;
+	margin:15px 0;
+	padding:15px 0 0;
+}
+
